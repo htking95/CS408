@@ -4,4 +4,10 @@ class PagesController < ApplicationController
 
   def contact
   end
+
+  def privacypolicy
+  end
+
+  def results
+  end
 end
