@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
   get 'pages/about'
-
+  get 'ContactUs', to: 'messages#new', as: 'contact'
+  post 'ContactUs', to: 'messages#create'
   devise_for :users
   
   # The priority is based upon order of creation: first created -> highest priority.
