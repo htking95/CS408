@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  post '/rate' => 'rater#create', :as => 'rate'
   get 'pages/about'
 
   devise_for :users
