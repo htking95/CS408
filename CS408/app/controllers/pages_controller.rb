@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+
   def home
   end
 
@@ -9,5 +10,7 @@ class PagesController < ApplicationController
   end
 
   def results
+
+  def about
   end
 end
