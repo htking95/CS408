@@ -10,7 +10,8 @@ class PagesController < ApplicationController
   end
 
   def results
-
+  end
+  
   def about
   end
 end
