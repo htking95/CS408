@@ -30,4 +30,13 @@ class CoursesController < ApplicationController
 		#	end
 		#end
 	end
+
+	def search
+		if params[:search].present?
+			@courses = Course.search(params[:search])
+		else
+			@courses = Course.all
+		end
+	end
 end
+
