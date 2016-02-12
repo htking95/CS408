@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160212030440) do
     t.integer  "overallAverage"
     t.string   "gradeAverage"
     t.integer  "numReviews"
+    t.string   "fullName"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

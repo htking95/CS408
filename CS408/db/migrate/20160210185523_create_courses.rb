@@ -9,7 +9,7 @@ class CreateCourses < ActiveRecord::Migration
       t.integer :average
       t.string :gradeAverage
       t.integer :numReviews
-
+      t.string :fullName
       t.timestamps null: false
     end
   end
