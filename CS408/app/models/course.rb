@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+
 	searchkick word_start: [:courseNum, :name, :department]
 	def search_data
 		{
@@ -7,4 +8,7 @@ class Course < ActiveRecord::Base
 			department: department
 		}
 	end
+
+	ratyrate_rateable "difficulty", "workload", "enjoyment"
+
 end
