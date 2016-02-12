@@ -28,6 +28,14 @@
 				  </span>
 				</div>
 	      	</form>
+
+	      	<%= form_tag search_courses_path, method: :get, class: "navbar-form" do %>
+	      		<p>
+	      			<%= text_field_tag :search, params[:search], class:"form-control" %>
+	      			<%= submit_tag "Search", name:nil, class: "btn btn-default" %>
+	      		</p>
+	      	<% end %>
+
 	    </div>
 	    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			<h5><a href="/users/sign_up">Sign Up</a> <a href="/users/sign_in">Log In</a></h5>
