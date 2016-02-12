@@ -24,8 +24,8 @@ module CS408
     config.active_record.raise_in_transactional_callbacks = true
   
     config.action_mailer.delivery_method = :smtp
-        #allows for email password recovery
-      config.action_mailer.smtp_settings = {
+    #allows for email password recovery
+    config.action_mailer.smtp_settings = {
          address:              'smtp.gmail.com',
          port:                 587,
          domain:               'apptitutordevs@gmail.com',
@@ -38,6 +38,5 @@ module CS408
         host: "apptitutordevs@gmail.com"
     }
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-
   end
 end
