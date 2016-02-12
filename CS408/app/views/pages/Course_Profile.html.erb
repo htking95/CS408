@@ -1,1 +1,27 @@
-<%= @course.name %>
+<script>
+  var aboutMe = "";
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover(); 
+        $("#selector").select2();
+        about_me = document.getElementById("about_me").getAttribute("data-about-me");
+        if(about_me != "" && about_me != null){
+          document.getElementById("about_me").innerHTML = about_me;
+        }
+    });
+    $('#messageModal').on('shown.bs.modal', function () {
+      $('#messageModal').focus()
+    });
+  </script>
+
+<%= @course.name %><br>
+
+<span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Difficulty" data-content="How hard was the class? 1 being the easiest, 5 being the hardest."><strong class="">Difficulty </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
+<%= rating_for @course, "difficulty", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
+
+<span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Workload" data-content="How much work did this class take? 1 being the least, 5 being the most."><strong class="">Workload </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
+<%= rating_for @course, "workload", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
+
+<span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Enjoyment" data-content="How much did you like the class? 1 being the least, 5 being the most."><strong class="">Enjoyment </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
+<%= rating_for @course, "enjoyment", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
+
+<%= best_in_place @course, :description %>

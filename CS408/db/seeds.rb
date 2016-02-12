@@ -21,7 +21,7 @@ for r in responce["value"]
     s << r["Abbreviation"]
     s << "'&$orderby=Number asc"
     
-    Department.create("name" => r["Abbreviation"])
+    identity = Department.create("abbreviation" => r["Abbreviation"], "name" => r["Name"])
     
     s = URI.encode(s)
     s = URI.parse(s)
@@ -30,8 +30,7 @@ for r in responce["value"]
         if v["Number"][0] != ""
             number = v["Number"].to_i
             if number < 45000
-                Course.create( "name" => r["Abbreviation"]+v["Number"] )
-                
+                Course.create( "courseNum" => v["Number"], "name" => v["Title"], "department" => identity.id )
             end
         end
     end

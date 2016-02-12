@@ -9,9 +9,8 @@
 	<!-- Bootstrap partial -->
  	<%= render 'layouts/bootstrapstuff' %>
 </head>
-<body>
 
-<%= render 'layouts/header' %>
+<body>
 
 <% flash.each do |name, msg| %>
 	<% if msg.is_a?(String) %>
@@ -22,9 +21,22 @@
 	<% end %>
 <% end %>
 
-<div style="margin-top: 55px">
-	<%= yield %>
-</div>
+<% if current_page?('/pages/home') %>
+    <%#= render 'layouts/home_header' %>
+    <div style="">
+		<%= yield %>
+	</div>
+<% else %>
+    <%= render 'layouts/header'%>
+    <div style="margin-top: 55px">
+		<%= yield %>
+	</div>
+<% end %>
+
+<!--<p class="notice"><%#= notice %></p>
+<p class="alert"><%#= alert %></p>-->
+
+
 <%= render 'layouts/footer' %>
 
 

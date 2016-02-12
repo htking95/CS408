@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-
+  respond_to :html, :json
   def home
   end
 
@@ -21,5 +21,7 @@ class PagesController < ApplicationController
       #@userreviews = @userprofile.userreviews.all
       #@userreview = @userprofile.userreviews.build
   end
+
+
 
 end

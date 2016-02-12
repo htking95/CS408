@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160212073015) do
   end
 
   create_table "courses", force: :cascade do |t|
+    t.string   "courseNum"
     t.string   "name"
     t.integer  "department"
     t.text     "description"
@@ -35,9 +36,10 @@ ActiveRecord::Schema.define(version: 20160212073015) do
   end
 
   create_table "departments", force: :cascade do |t|
+    t.string   "abbreviation"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "instructors", force: :cascade do |t|
