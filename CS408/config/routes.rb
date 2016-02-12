@@ -20,7 +20,8 @@ Rails.application.routes.draw do
 
   get 'pages/results'
 
-  get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
+  #get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
+  get  'courses/show/:id' => 'courses#show', :id => 'id'
 
   root 'pages#home'
 
