@@ -5,10 +5,22 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+	<!-- Bootstrap partial -->
+ 	<%= render 'layouts/bootstrapstuff' %>
 </head>
 <body>
 
-<%= yield %>
+<%= render 'layouts/header' %>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<div style="margin-top: 55px">
+	<%= yield %>
+</div>
+<%= render 'layouts/footer' %>
+
 
 </body>
 </html>
