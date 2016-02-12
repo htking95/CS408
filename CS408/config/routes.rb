@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :reviews
-  
   resources :courses do
+    resources :reviews, except: [:show, :index]
     collection do
       get 'search'
     end
@@ -12,6 +11,7 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+
   get 'pages/home'
 
   get 'pages/contact'
@@ -20,7 +20,8 @@ Rails.application.routes.draw do
 
   get 'pages/results'
 
-  get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
+  #get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
+  get  'courses/show/:id' => 'courses#show', :id => 'id'
 
   root 'pages#home'
 
