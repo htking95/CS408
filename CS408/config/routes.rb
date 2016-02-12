@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   get 'pages/home'
 
   get 'pages/contact'
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   get 'pages/privacypolicy'
 
   get 'pages/results'
+
+  get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
 
   root 'pages#home'
 
