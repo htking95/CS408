@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :reviews, except: [:show, :index]
   resources :courses do
+    resources :reviews, except: [:show, :index]
     collection do
       get 'search'
     end
