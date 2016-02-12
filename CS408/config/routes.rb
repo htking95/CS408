@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
-
+  
   resources :courses do
     collection do
       get 'search'
