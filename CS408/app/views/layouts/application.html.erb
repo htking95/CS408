@@ -9,16 +9,27 @@
 	<!-- Bootstrap partial -->
  	<%= render 'layouts/bootstrapstuff' %>
 </head>
+
 <body>
 
-<%= render 'layouts/header' %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if current_page?('/pages/home') %>
+    <%#= render 'layouts/home_header' %>
+    <div style="">
+		<%= yield %>
+	</div>
+<% else %>
+    <%= render 'layouts/header'%>
+    <div style="margin-top: 55px">
+		<%= yield %>
+	</div>
+<% end %>
 
-<div style="margin-top: 55px">
-	<%= yield %>
-</div>
+<!--<p class="notice"><%#= notice %></p>
+<p class="alert"><%#= alert %></p>-->
+
+
+
 <%= render 'layouts/footer' %>
 
 
