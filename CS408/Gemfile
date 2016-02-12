@@ -37,7 +37,7 @@ gem 'ratyrate'
 # gem 'capistrano-rails', group: :development
 
 gem 'httparty'
-
+gem 'best_in_place'
 
 
 group :development, :test do

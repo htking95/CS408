@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
+  resources :courses
   get 'pages/home'
 
   get 'pages/contact'
