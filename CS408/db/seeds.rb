@@ -30,9 +30,8 @@ for r in responce["value"]
         if v["Number"][0] != ""
             number = v["Number"].to_i
             if number < 45000
-            	tmp = r["Abbreviation"]
-            	tmp << v["Number"]
-                Course.create( "name" => tmp )
+                Course.create( "name" => r["Abbreviation"]+v["Number"] )
+                
             end
         end
     end

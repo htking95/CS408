@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211045909) do
+ActiveRecord::Schema.define(version: 20160212030440) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 20160211045909) do
     t.integer  "department"
     t.text     "description"
     t.datetime "lastEdited"
-    t.integer  "average"
+    t.integer  "overallAverage"
     t.string   "gradeAverage"
     t.integer  "numReviews"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "departments", force: :cascade do |t|
