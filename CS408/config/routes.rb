@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'pages/results'
 
+  get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
+
   root 'pages#home'
 
   post '/rate' => 'rater#create', :as => 'rate'
