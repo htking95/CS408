@@ -1,1 +1,0 @@
-json.extract! @review, :id, :UserID, :CourseID, :Comment, :HelpfulCount, :Unhelpful, :FunnyCount, :FlagCount, :InstructorID, :TAs, :GradeReceived, :HoursAWeek, :TextbookRequired, :AttendanceRequired, :Semester, :YearTaken, :DepartmentID, :created_at, :updated_at
