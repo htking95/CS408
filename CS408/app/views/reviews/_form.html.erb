@@ -1,0 +1,81 @@
+<%= form_for(@review) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :UserID %>
+    <%= f.number_field :UserID, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :CourseID %>
+    <%= f.number_field :CourseID, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Comment %>
+    <%= f.text_area :Comment, class:"form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :HelpfulCount %><br>
+    <%= f.number_field :HelpfulCount %>
+  </div>
+  <div class="field">
+    <%= f.label :Unhelpful %><br>
+    <%= f.number_field :Unhelpful %>
+  </div>
+  <div class="field">
+    <%= f.label :FunnyCount %><br>
+    <%= f.number_field :FunnyCount %>
+  </div>
+  <div class="field">
+    <%= f.label :FlagCount %><br>
+    <%= f.number_field :FlagCount %>
+  </div>
+  <div class="form-group">
+    <%= f.label :InstructorID %>
+    <%= f.number_field :InstructorID, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :TAs %>
+    <%= f.text_field :TAs, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :GradeReceived %>
+    <%= f.number_field :GradeReceived, class:"form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :HoursAWeek %><br>
+    <%= f.number_field :HoursAWeek %>
+  </div>
+  <div class="field">
+    <%= f.label :TextbookRequired %><br>
+    <%= f.check_box :TextbookRequired %>
+  </div>
+  <div class="field">
+    <%= f.label :AttendanceRequired %><br>
+    <%= f.check_box :AttendanceRequired %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Semester %>
+    <%= f.text_field :Semester, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :YearTaken %>
+    <%= f.number_field :YearTaken, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :DepartmentID %>
+    <%= f.number_field :DepartmentID, class:"form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
