@@ -1,2 +1,80 @@
-<h1>Tis the Home Page!</h1>
-<p>This will be heavily modified to look fresh and clean here very very soon. :)</p>
+<style>
+	.adbox {
+		height: 175px;
+	}
+	.adcontent {
+		padding: 10px; 
+		background-color: blue; 
+		height: 100%;
+		box-shadow: 2px 2px 10px black;
+	}
+</style>
+<div align="center" style="background-color: black; color: gold; padding: 20px">
+	<h1><i>RATE MY COURSES</i></h1>
+</div>
+
+<div style="background-color: gold">
+<div class="container-fluid" align="center" style="">
+	<div class="row" style="">
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			&nbsp
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<form class="" role="search" style="">
+		        <div class="input-group" style="margin: 5px 0px 5px 0px;">
+  					<input id="course" type="textbox" placeholder="Search for a course at Purdue University" class="form-control" style="border-radius: 20px; height: 36px">
+				 	<span class="input-group-btn">
+				    <button class="btn" type="button" id="courseSearch" style="background-color:white; border-radius:20px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				  </span>
+				</div>
+	      	</form>
+
+	      	<%= form_tag search_courses_path, method: :get, class: "navbar-form" do %>
+	      		<p>
+	      			<%= text_field_tag :search, params[:search], class:"form-control", placeholder:"search for a course" %>
+	      			<%= submit_tag "Search", name:nil, class: "btn btn-default" %>
+	      		</p>
+	      	<% end %>
+
+	    </div>
+	    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<h5><a href="/users/sign_up">Sign Up</a> <a href="/users/sign_in">Log In</a></h5>
+		</div>
+    </div>
+</div>
+</div>
+
+<div class="container" style="height: 200px">
+	<div class="row" style="margin: 10px"> <!-- I want this to have a cool blur background -->
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 adbox">
+			<div class="adcontent">Share Your Experience<br>Good or Bad!</div>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 adbox">
+			<div class="adcontent">See What Others are Saying About the Courses You are Taking!</div>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 adbox">
+			<div class="adcontent">Ask Questions and Get Real Answers!</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid" style="background-color: black; min-height: 500px; margin: 0px 50px 0px 50px">
+	<div class="row" style="color: gold; background-color: black">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+			<h3>#Top Rated Courses</h3>
+		</div>
+	</div>
+	<div class="row" align="center" style="background-color: black; color: white">
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			&nbsp
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			Course 1<br>
+			<hr style="width: 100%">
+			Course 2
+		</div>
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			&nbsp
+		</div>
+	</div>
+</div>
