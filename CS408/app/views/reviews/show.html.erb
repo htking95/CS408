@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @review.UserID %>
+</p>
+
+<p>
+  <strong>Courseid:</strong>
+  <%= @review.CourseID %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @review.Comment %>
+</p>
+
+<p>
+  <strong>Helpfulcount:</strong>
+  <%= @review.HelpfulCount %>
+</p>
+
+<p>
+  <strong>Unhelpful:</strong>
+  <%= @review.Unhelpful %>
+</p>
+
+<p>
+  <strong>Funnycount:</strong>
+  <%= @review.FunnyCount %>
+</p>
+
+<p>
+  <strong>Flagcount:</strong>
+  <%= @review.FlagCount %>
+</p>
+
+<p>
+  <strong>Instructorid:</strong>
+  <%= @review.InstructorID %>
+</p>
+
+<p>
+  <strong>Tas:</strong>
+  <%= @review.TAs %>
+</p>
+
+<p>
+  <strong>Gradereceived:</strong>
+  <%= @review.GradeReceived %>
+</p>
+
+<p>
+  <strong>Hoursaweek:</strong>
+  <%= @review.HoursAWeek %>
+</p>
+
+<p>
+  <strong>Textbookrequired:</strong>
+  <%= @review.TextbookRequired %>
+</p>
+
+<p>
+  <strong>Attendancerequired:</strong>
+  <%= @review.AttendanceRequired %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @review.Semester %>
+</p>
+
+<p>
+  <strong>Yeartaken:</strong>
+  <%= @review.YearTaken %>
+</p>
+
+<p>
+  <strong>Departmentid:</strong>
+  <%= @review.DepartmentID %>
+</p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>
