@@ -1,4 +1,35 @@
 Rails.application.routes.draw do
+  resources :reviews
+  
+  resources :courses do
+    collection do
+      get 'search'
+    end
+  end
+  
+  resources :departments do
+    collection do
+      get 'search'
+    end
+  end
+  get 'pages/home'
+
+  get 'pages/contact'
+
+  get 'pages/privacypolicy'
+
+  get 'pages/results'
+
+  get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
+
+  root 'pages#home'
+
+  post '/rate' => 'rater#create', :as => 'rate'
+  get 'pages/about'
+  get 'ContactUs', to: 'messages#new', as: 'contact'
+  post 'ContactUs', to: 'messages#create'
+  devise_for :users
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -5,3 +5,33 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+require 'httparty'
+
+responce = HTTParty.get(URI.parse(URI.encode("http://api.purdue.io/odata/Instructors")))
+for i in responce["value"]
+	Instructor.create("name" => i["Name"], "email" => i["Email"])
+end
+
+
+responce = HTTParty.get(URI.parse(URI.encode("http://api.purdue.io/odata/Subjects")))
+for r in responce["value"]
+    
+    s = "http://api.purdue.io/odata/Courses?$filter=Subject/Abbreviation eq '"
+    s << r["Abbreviation"]
+    s << "'&$orderby=Number asc"
+    
+    identity = Department.create("abbreviation" => r["Abbreviation"], "name" => r["Name"])
+    
+    s = URI.encode(s)
+    s = URI.parse(s)
+    c = HTTParty.get(s)
+    for v in c["value"]
+        if v["Number"][0] != ""
+            number = v["Number"].to_i
+            if number < 45000
+                Course.create( "courseNum" => v["Number"], "name" => v["Title"], "department" => identity.id )
+            end
+        end
+    end
+end

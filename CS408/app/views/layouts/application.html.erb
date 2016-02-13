@@ -5,10 +5,33 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+	<!-- Bootstrap partial -->
+ 	<%= render 'layouts/bootstrapstuff' %>
 </head>
+
 <body>
 
-<%= yield %>
+
+<% if current_page?('/pages/home') %>
+    <%#= render 'layouts/home_header' %>
+    <div style="">
+		<%= yield %>
+	</div>
+<% else %>
+    <%= render 'layouts/header'%>
+    <div style="margin-top: 55px">
+		<%= yield %>
+	</div>
+<% end %>
+
+<!--<p class="notice"><%#= notice %></p>
+<p class="alert"><%#= alert %></p>-->
+
+
+
+<%= render 'layouts/footer' %>
+
 
 </body>
 </html>
