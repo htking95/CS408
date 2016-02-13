@@ -1,4 +1,4 @@
-<%= form_for(@review) do |f| %>
+<%= form_for([@cid, @review]) do |f| %>
   <% if @review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :UserID %>
-    <%= f.number_field :UserID, class:"form-control" %>
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id, class:"form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :CourseID %>
-    <%= f.number_field :CourseID, class:"form-control" %>
+    <%= f.label :course_id %>
+    <%= f.number_field :course_id, class:"form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :Comment %>
