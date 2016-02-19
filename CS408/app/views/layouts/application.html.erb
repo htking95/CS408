@@ -9,16 +9,34 @@
 	<!-- Bootstrap partial -->
  	<%= render 'layouts/bootstrapstuff' %>
 </head>
+
 <body>
 
-<%= render 'layouts/header' %>
+<% flash.each do |name, msg| %>
+	<% if msg.is_a?(String) %>
+		<div class="alert alert-<%= name == "notice" ? "success" : "danger" %> alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<%= content_tag :div, msg, :id => "flash_#{name}" %>
+		</div>
+	<% end %>
+<% end %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if current_page?('/pages/home') %>
+    <%#= render 'layouts/home_header' %>
+    <div style="">
+		<%= yield %>
+	</div>
+<% else %>
+    <%= render 'layouts/header'%>
+    <div style="margin-top: 55px">
+		<%= yield %>
+	</div>
+<% end %>
 
-<div style="margin-top: 55px">
-	<%= yield %>
-</div>
+<!--<p class="notice"><%#= notice %></p>
+<p class="alert"><%#= alert %></p>-->
+
+
 <%= render 'layouts/footer' %>
 
 
