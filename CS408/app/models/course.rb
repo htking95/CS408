@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+	has_many :reviews
 
 	searchkick word_start: [:courseNum, :name, :department]
 	def search_data

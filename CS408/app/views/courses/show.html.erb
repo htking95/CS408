@@ -25,3 +25,14 @@
 <%= rating_for @course, "enjoyment", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
 
 <%= best_in_place @course, :description %>
+
+
+<%= link_to "Write a Review", new_course_review_path(:course_id => @course.id), class: "btn btn-primary" %>
+
+<% if @reviews.blank? %>
+  <h3>No reviews yet. Be the first to write one!</h3>
+<% else %>
+  <% @reviews.each do |review| %>
+    <p><%= review.Comment %></p>
+  <% end %>
+<% end %>
