@@ -10,4 +10,8 @@ class Review < ActiveRecord::Base
   	def scoreFunny
   		self.find_votes_for(:vote_scope => 'funny').size
   	end
+
+  	def scoreFlag
+  		self.find_votes_for(:vote_scope => 'flag').size
+  	end
 end

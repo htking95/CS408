@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_course
+  before_action :set_course, only: [:edit, :update, :destroy, :show, :create, :new]
   before_action :authenticate_user!
 
   # GET /reviews/new
@@ -84,6 +84,16 @@ class ReviewsController < ApplicationController
      redirect_to :back
   end
 
+  def flag
+     @review = Review.find(params[:id])
+     if current_user.voted_on? @review, vote_scope: 'flag' then
+        @review.unvote_by current_user, vote_scope: 'flag'
+     else
+        @review.upvote_by current_user, vote_scope: 'flag'
+     end
+     redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
@@ -91,7 +101,7 @@ class ReviewsController < ApplicationController
     end
 
     def set_course
-      #@cid = Course.find(params[:course_id])
+      @cid = Course.find(params[:course_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
