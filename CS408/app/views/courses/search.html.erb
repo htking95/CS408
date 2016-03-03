@@ -1,10 +1,15 @@
 <style>
 	.result {
 		background-color: gold;
-		box-shadow: 0px 0px 20px white;
+		box-shadow: 2px 2px 20px white;
+		border-radius: 5px;
+	}
+	.result:hover{
+		box-shadow: 6px 6px 15px white;
 	}
 	.resultRow {
 		background-color: black;
+		margin: 5px 0px 5px 0px;
 	}
 	.description {
 		border: 1px solid black;
@@ -13,10 +18,12 @@
 		overflow: auto;
 		margin: 5px 5px 0px 5px;
 		padding: 5px;
+		background-color: gold;
 	}
 	.descriptionBox {
 		border: 1px solid black;
-		margin-bottom: 10px
+		margin-bottom: 10px;
+		background-color: white;
 	}
 	#pageContainer {
 		background-color: black;
@@ -24,16 +31,26 @@
 	.lastEdited {
 		padding-right: 10px;
 	}
+	.courseLink {
+		color: black;
+	}
+	.courseLink:hover {
+		color: black;
+	}
+	.courseLink:visited{
+		color:black;
+	}
 </style>
 <div class="container-fluid" id="pageContainer">
 	<% @courses.each do |course| %>
+		<a href="/courses/<%=course.id%>" class="courseLink">
 		<div class="row resultRow">
 			<div class="col-xs-1 col-sm-2">&nbsp</div> <!-- For spacing -->
 			<div class="col-xs-10 col-sm-8 result">
 			    <div><h3><b><%= course.fullName %> : <%= course.name %></b></h3></div>
-			    <div><h5><b>Department of <%= course.department %></b></h5></div>
-			    <hr style="margin:0px; border-color:black">
-			    <div class="">
+			    <div><h5><b><%= course.departmentFull %> Department (<%= course.department %>)</b></h5></div>
+			    <hr style="margin:0px; border: 1px solid white">
+			    <div class="" style="padding-top: 4px">
 			    	Course Description:
 			    	<div class="descriptionBox">
 			    		<div class="description">
@@ -55,6 +72,7 @@
 			</div>
 		    <div class="col-xs-1 col-sm-2">&nbsp</div> <!-- For spacing -->
 		</div>
+		</a>
 		<br>
 	<% end %>
 </div>
