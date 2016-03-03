@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   respond_to :html, :json
   def home
+    @courses = Course.all
   end
 
   def contact

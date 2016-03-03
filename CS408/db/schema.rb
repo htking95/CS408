@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212073015) do
+ActiveRecord::Schema.define(version: 20160228220533) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -25,23 +25,23 @@ ActiveRecord::Schema.define(version: 20160212073015) do
   create_table "courses", force: :cascade do |t|
     t.string   "courseNum"
     t.string   "name"
-    t.integer  "departmentID"
-    t.string   "department"
+    t.integer  "department"
     t.text     "description"
     t.datetime "lastEdited"
     t.integer  "overallAverage"
     t.string   "gradeAverage"
     t.integer  "numReviews"
     t.string   "fullName"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "ratings",        default: 0
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string   "abbreviation"
     t.string   "name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "abbreviation"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -119,6 +119,9 @@ ActiveRecord::Schema.define(version: 20160212073015) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
