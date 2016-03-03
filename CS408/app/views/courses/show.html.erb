@@ -34,5 +34,10 @@
 <% else %>
   <% @reviews.each do |review| %>
     <p><%= review.Comment %></p>
+    <%= link_to 'upvote', like_review_path(review), method: :put %>
+    <%= link_to 'downvote', dislike_review_path(review), method: :put %>
+    <%= link_to 'funnyvote', funny_review_path(review), method: :put %>
+    score: <%= review.scoreReview %>
+    funniness: <%= review.scoreFunny %>
   <% end %>
 <% end %>

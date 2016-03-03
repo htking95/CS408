@@ -54,6 +54,36 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def upvote
+     @review = Review.find(params[:id])
+     if current_user.voted_up_on? @review then
+        @review.unvote_by current_user
+     else
+        @review.upvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def downvote
+     @review = Review.find(params[:id])
+     if current_user.voted_down_on? @review then
+        @review.unvote_by current_user
+     else
+        @review.downvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def funnyvote
+     @review = Review.find(params[:id])
+     if current_user.voted_on? @review, vote_scope: 'funny' then
+        @review.unvote_by current_user, vote_scope: 'funny'
+     else
+        @review.upvote_by current_user, vote_scope: 'funny'
+     end
+     redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
@@ -61,7 +91,7 @@ class ReviewsController < ApplicationController
     end
 
     def set_course
-      @cid = Course.find(params[:course_id])
+      #@cid = Course.find(params[:course_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
