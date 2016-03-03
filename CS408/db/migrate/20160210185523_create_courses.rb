@@ -5,6 +5,7 @@ class CreateCourses < ActiveRecord::Migration
       t.string :name
       t.integer :departmentID
       t.string :department
+      t.string :departmentFull
       t.text :description
       t.datetime :lastEdited
       t.integer :average

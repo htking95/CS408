@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160212073015) do
     t.string   "name"
     t.integer  "departmentID"
     t.string   "department"
+    t.string   "departmentFull"
     t.text     "description"
     t.datetime "lastEdited"
     t.integer  "overallAverage"
