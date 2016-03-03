@@ -69,9 +69,15 @@
 			&nbsp
 		</div>
 		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-			Course 1<br>
-			<hr style="width: 100%">
-			Course 2
+			<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).each do |course| %>
+			  <div class="container">
+			  <br><br><br><br>
+			    <div>Course Number:<%= course.courseNum %></div>
+			    <div>Course Name: <%= course.name %></div>
+			    <div>Department id: <%= course.department %></div>
+			    <div>Ratings: <%= course.ratings %></div>
+			  </div>
+			<% end %>
 		</div>
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			&nbsp
