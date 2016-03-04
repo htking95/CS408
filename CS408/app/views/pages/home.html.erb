@@ -90,27 +90,16 @@
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 			&nbsp
 		</div>
-		<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			<div id="topCourseEntry">
-				Course 1 Name and Number
-				<div>
-					Here will be the rating and stars *****
-				</div>
-				<div>
-					A top comment: This course is incredibly easy! It doesn't take a lot of work (2 hrs/week) and you can get everything done...
-				</div>
-			</div>
-			<hr style="width: 100%">
-			<div id="topCourseEntry">
-				Course 2 Name and Number
-				<div>
-					Here will be the rating and stars *****
-				</div>
-				<div>
-					A top comment: This course is incredibly easy! It doesn't take a lot of work (2 hrs/week) and you can get everything done...
-				</div>
-			</div>
-		</div>
+
+		<div class="col-xs-10">
+			<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).each do |course| %>
+			  <div class="container-fluid">
+			    <div>Course Number:<%= course.courseNum %></div>
+			    <div>Course Name: <%= course.name %></div>
+			    <div>Department id: <%= course.department %></div>
+			    <div>Ratings: <%= course.ratings %></div>
+			  </div>
+			<% end %>
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 			&nbsp
 		</div>
