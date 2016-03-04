@@ -1,8 +1,78 @@
-<% @courses.each do |course| %>
-  <div class="container">
-  <br><br><br><br>
-    <div>Course Number:<%= course.courseNum %></div>
-    <div>Course Name: <%= course.name %></div>
-    <div>Department id: <%= course.department %></div>
-  </div>
-<% end %>
+<style>
+	.result {
+		background-color: gold;
+		box-shadow: 2px 2px 20px white;
+		border-radius: 5px;
+	}
+	.result:hover{
+		box-shadow: 6px 6px 15px white;
+	}
+	.resultRow {
+		background-color: black;
+		margin: 5px 0px 5px 0px;
+	}
+	.description {
+		border: 1px solid black;
+		min-height: 100px;
+		max-height: 200px;
+		overflow: auto;
+		margin: 5px 5px 0px 5px;
+		padding: 5px;
+		background-color: gold;
+	}
+	.descriptionBox {
+		border: 1px solid black;
+		margin-bottom: 10px;
+		background-color: white;
+	}
+	#pageContainer {
+		background-color: black;
+	}
+	.lastEdited {
+		padding-right: 10px;
+	}
+	.courseLink {
+		color: black;
+	}
+	.courseLink:hover {
+		color: black;
+	}
+	.courseLink:visited{
+		color:black;
+	}
+</style>
+<div class="container-fluid" id="pageContainer">
+	<% @courses.each do |course| %>
+		<div class="row resultRow">
+			<div class="col-xs-1 col-sm-2">&nbsp</div> <!-- For spacing -->
+			<a href="/courses/<%=course.id%>" class="courseLink">
+			<div class="col-xs-10 col-sm-8 result">
+			    <div><h3><b><%= course.fullName %> : <%= course.name %></b></h3></div>
+			    <div><h5><b><%= course.departmentFull %> Department (<%= course.department %>)</b></h5></div>
+			    <hr style="margin:0px; border: 1px solid white">
+			    <div class="" style="padding-top: 4px">
+			    	Course Description:
+			    	<div class="descriptionBox">
+			    		<div class="description">
+			    			<% if course.description.blank? %>
+			    				There is no description for this course yet. If you are familiar with this course, please write a review for this course and add to the description yourself!
+			    			<% else %>
+			    				<%= course.description %>
+			    			<% end %>
+			    		</div>
+			    		<div align="right" class="lastEdited">
+			    			<% if course.lastEdited.blank? %>
+			    				Last edited: n/a
+			    			<% else %>
+			    				Last edited: <%= course.lastEdited %>
+			    			<% end %>
+			    		</div>
+			    	</div>
+			    </div>
+			</div>
+			</a>
+		    <div class="col-xs-1 col-sm-2">&nbsp</div> <!-- For spacing -->
+		</div>
+		<br>
+	<% end %>
+</div>
