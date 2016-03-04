@@ -1,4 +1,4 @@
-<%= form_for([@cid, @review]) do |f| %>
+<%= form_for([@cid, @review], :html => {multipart: true}) do |f| %>
   <% if @review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -74,6 +74,10 @@
   <div class="form-group">
     <%= f.label :DepartmentID %>
     <%= f.number_field :DepartmentID, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :syllabus %>
+    <%= f.file_field :syllabus, class:"form-control" %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>

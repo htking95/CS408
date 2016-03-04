@@ -41,6 +41,7 @@
   <% @reviews.each do |review| %>
     <p><%= review.Comment %></p>
     <p><%= review.created_at %></p>
+    <p><%= link_to "Download Syllabus", review.attachment_url %></p>
     <%= link_to 'upvote', like_review_path(review), method: :put %>
     <%= link_to 'downvote', dislike_review_path(review), method: :put %>
     <%= link_to 'funnyvote', funny_review_path(review), method: :put %>
