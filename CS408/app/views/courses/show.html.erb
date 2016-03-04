@@ -36,3 +36,40 @@
     <p><%= review.Comment %></p>
   <% end %>
 <% end %>
+
+
+<%= form_for @course.questions.new do |f| %>
+    <%= f.text_field :question %>
+    <%= f.hidden_field :course_id, "value" => @course.id %>
+    <%= f.hidden_field :userID, "value" => current_user.id %>
+    <%= f.submit "Ask Question" %>
+<% end %>
+
+<% @course.questions.each do |q| %>
+  <% if !q.question.nil? %>
+      <%= q.question %>
+      <%  q.answers.each do |a| %>
+         <%= a.answer %>
+      <% end %>
+     <%= form_for q.answers.new do |f| %>
+       <%= f.text_field :answer %>
+       <%= f.submit "Answer Question" %>
+       <%= f.hidden_field :question_id, "value" => @question.id %>
+       <%= f.hidden_field :userID, "value" => current_user.id %>
+     <% end %>
+  <% end %> 
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
