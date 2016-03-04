@@ -3,7 +3,9 @@ class CreateCourses < ActiveRecord::Migration
     create_table :courses do |t|
       t.string :courseNum
       t.string :name
-      t.integer :department
+      t.integer :departmentID
+      t.string :department
+      t.string :departmentFull
       t.text :description
       t.datetime :lastEdited
       t.integer :average

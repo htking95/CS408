@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 20160302010040) do
   create_table "courses", force: :cascade do |t|
     t.string   "courseNum"
     t.string   "name"
-    t.integer  "department"
+    t.integer  "departmentID"
+    t.string   "department"
+    t.string   "departmentFull"
     t.text     "description"
     t.datetime "lastEdited"
     t.integer  "overallAverage"

@@ -30,7 +30,7 @@ for r in responce["value"]
         if v["Number"][0] != ""
             number = v["Number"].to_i
             if number < 45000
-                Course.create( "courseNum" => v["Number"], "name" => v["Title"], "department" => identity.id, "fullName" => r["Abbreviation"]+v["Number"] )
+                Course.create( "courseNum" => v["Number"], "name" => v["Title"], "departmentID" => identity.id, "fullName" => r["Abbreviation"]+v["Number"], "department" => r["Abbreviation"], "departmentFull" => r["Name"])
             end
         end
     end
