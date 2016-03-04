@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CS408</title>
+  <title>RateMyCourses</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -21,14 +21,14 @@
 	<% end %>
 <% end %>
 
-<% if current_page?('/pages/home') %>
+<% if current_page?('/pages/home') || current_page?('/') %>
     <%#= render 'layouts/home_header' %>
     <div style="">
 		<%= yield %>
 	</div>
 <% else %>
     <%= render 'layouts/header'%>
-    <div style="margin-top: 55px">
+    <div style="margin-top: 7px">
 		<%= yield %>
 	</div>
 <% end %>

@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_course
+  before_action :set_course, only: [:edit, :update, :destroy, :show, :create, :new]
   before_action :authenticate_user!
 
   # GET /reviews/new
@@ -52,6 +52,46 @@ class ReviewsController < ApplicationController
       format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+     @review = Review.find(params[:id])
+     if current_user.voted_up_on? @review then
+        @review.unvote_by current_user
+     else
+        @review.upvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def downvote
+     @review = Review.find(params[:id])
+     if current_user.voted_down_on? @review then
+        @review.unvote_by current_user
+     else
+        @review.downvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def funnyvote
+     @review = Review.find(params[:id])
+     if current_user.voted_on? @review, vote_scope: 'funny' then
+        @review.unvote_by current_user, vote_scope: 'funny'
+     else
+        @review.upvote_by current_user, vote_scope: 'funny'
+     end
+     redirect_to :back
+  end
+
+  def flag
+     @review = Review.find(params[:id])
+     if current_user.voted_on? @review, vote_scope: 'flag' then
+        @review.unvote_by current_user, vote_scope: 'flag'
+     else
+        @review.upvote_by current_user, vote_scope: 'flag'
+     end
+     redirect_to :back
   end
 
   private

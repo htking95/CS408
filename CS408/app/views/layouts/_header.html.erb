@@ -55,27 +55,47 @@ $(document).ready(function () {
          <span class="icon-bar"></span>
          </button>
 
-          <a class="navbar-brand pull-left" href="/pages/home" style="color: white">CS408 </a>
+          <a class="navbar-brand pull-left" href="/pages/home" style="color: white">RateMyCourses</a>
 
-        <%= form_tag new_user_registration_path, method: :get, class: "navbar-form pull-left", role: "search" do %>
+        <!--<%#= form_tag new_user_registration_path, method: :get, class: "navbar-form pull-left", role: "search" do %>
           <div class="input-group">
-            <%= text_field_tag :search, params[:search],  placeholder:"Search" , class: "form-control" %>
+            <%#= text_field_tag :search, params[:search],  placeholder:"Search" , class: "form-control" %>
             <div class="input-group-btn">
-            <%= button_tag( :class => "btn btn-default") do %>
+            <%#= button_tag( :class => "btn btn-default") do %>
             <span style="margin-right: 2px" class="glyphicon glyphicon-search"></span>
-            <% end %>
+            <%# end %>
             </div>            
-          </div>
-        <% end %>   
+          </div> -->
+        <%# end %>   
         
-        <%= form_tag search_courses_path, method: :get, class: "navbar-form" do %>
-            <p>
-              <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"search for a course" %>
-              <%= submit_tag "Search", name:nil, class: "btn btn-default" %>
-            </p>
-        <% end %>
+        <%#= form_tag search_courses_path, method: :get, class: "navbar-form" do %>
+            <!--<p>
+              <%#= text_field_tag :search, params[:search], class:"form-control", placeholder:"search for a course" %>
+              <%#= submit_tag "Search", name:nil, class: "btn btn-default" %>
+           </p>-->
+        <%# end %>
+        
+        <div class="navbar-form" style="width: 300px">    
+        <%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
+        
+              <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; border: 5px solid gray; background-color: white; color: black" %>
+              <div class="input-group-btn">
+              <%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; border: 5px solid gray; height: 40px") do %>
+                <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
+              <% end %>
+              </div>
+        
+          <% end %>
+          </div>
+        
 
       </div>
+
+
+        
+
+
+
 
       <div class="navbar-collapse collapse">
          <ul class="nav navbar-nav navbar-right">

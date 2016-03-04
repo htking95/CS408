@@ -39,5 +39,10 @@ class CoursesController < ApplicationController
 			@courses = Course.all
 		end
 	end
+
+	def getDepartmentName
+		@courseid = Course.id
+		@coursedepartment = Department.course_id
+	end
 end
 

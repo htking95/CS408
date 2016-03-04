@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :answers
+  resources :questions
   resources :courses do
     resources :reviews, except: [:show, :index]
     collection do
@@ -10,6 +12,15 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+  end
+
+  resources :reviews do
+      member do
+        put "like", to: "reviews#upvote"
+        put "dislike", to: "reviews#downvote"
+        put "funny", to: "reviews#funnyvote"
+        put "flag", to: "reviews#flag"
+      end
   end
 
   get 'pages/home'
@@ -30,6 +41,7 @@ Rails.application.routes.draw do
   get 'ContactUs', to: 'messages#new', as: 'contact'
   post 'ContactUs', to: 'messages#create'
   devise_for :users
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
