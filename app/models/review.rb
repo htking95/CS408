@@ -13,6 +13,22 @@ class Review < ActiveRecord::Base
   	end
 
   	def scoreFlag
-  		self.find_votes_for(:vote_scope => 'flag').size
+      self.get_upvotes(:vote_scope => 'flag').sum(:vote_weight) - self.get_downvotes(:vote_scope => 'flag').sum(:vote_weight)
   	end
+
+    def getGrade(grade)
+      case grade
+      when 1
+        return 'A'
+      when 2
+        return 'B'
+      when 3
+        return 'C'
+      when 4
+        return 'D'
+      when 5
+        return 'F'
+      end
+    end
+
 end

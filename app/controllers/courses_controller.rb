@@ -36,13 +36,8 @@ class CoursesController < ApplicationController
 		if params[:search].present?
 			@courses = Course.search(params[:search])
 		else
-			@courses = Course.all
+			@courses = nil
 		end
-	end
-
-	def getDepartmentName
-		@courseid = Course.id
-		@coursedepartment = Department.course_id
 	end
 end
 

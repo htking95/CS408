@@ -34,4 +34,42 @@ class Course < ActiveRecord::Base
 	    end
 	end
 
+	def averageGrade
+		total = 0
+		puts "Begining of average Grade func"
+		count = 0
+		if self.reviews == nil then
+			return nil
+		end
+		self.reviews.each do |r|
+			puts "Looping through reviews"
+			puts r.GradeReceived
+			if !(r.GradeReceived == nil) then
+				count = count + 1
+				total = total + r.GradeReceived
+			end
+		end
+
+		if count == 0 then
+			return nil
+		end
+		
+		avgG = total/count
+		puts "avg"
+		puts avgG
+		
+		case avgG
+      	when 1
+        	return 'A'
+      	when 2
+        	return 'B'
+      	when 3
+        	return 'C'
+      	when 4
+        	return 'D'
+      	when 5
+        	return 'F'
+      	end
+	end	
+
 end

@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
 	  before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!
   # GET /questions
   # GET /questions.json
   def index
@@ -28,7 +28,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.html { redirect_to :back, notice: 'Answer was successfully created.' }
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit }
@@ -56,9 +56,39 @@ class AnswersController < ApplicationController
   def destroy
     @answer.answer
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+     @answer = Answer.find(params[:id])
+     if current_user.voted_up_on? @answer then
+        @answer.unvote_by current_user
+     else
+        @answer.upvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def downvote
+     @answer = Answer.find(params[:id])
+     if current_user.voted_down_on? @answer then
+        @answer.unvote_by current_user
+     else
+        @answer.downvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def flag
+     @answer = Answer.find(params[:id])
+     if current_user.voted_on? @answer, vote_scope: 'flag' then
+        @answer.unvote_by current_user, vote_scope: 'flag'
+     else
+        @answer.upvote_by current_user, vote_scope: 'flag'
+     end
+     redirect_to :back
   end
 
   private
