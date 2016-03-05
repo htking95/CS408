@@ -44,8 +44,10 @@ class Course < ActiveRecord::Base
 		self.reviews.each do |r|
 			puts "Looping through reviews"
 			puts r.GradeReceived
-			count = count + 1
-			total = total + r.GradeReceived
+			if !(r.GradeReceived == nil) then
+				count = count + 1
+				total = total + r.GradeReceived
+			end
 		end
 
 		if count == 0 then

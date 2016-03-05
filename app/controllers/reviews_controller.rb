@@ -1,7 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_course, only: [:edit, :update, :destroy, :show, :create, :new]
+  before_action :set_course, only: [:edit, :update, :show, :create, :new]
   before_action :authenticate_user!
+  before_action :check_user,  only: [:edit, :update, :destroy]
 
   # GET /reviews/new
   def new
@@ -49,7 +50,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to pages_admin_path, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -87,9 +88,17 @@ class ReviewsController < ApplicationController
   def flag
      @review = Review.find(params[:id])
      if current_user.voted_on? @review, vote_scope: 'flag' then
-        @review.unvote_by current_user, vote_scope: 'flag'
+        @review.unvote_by current_user, vote_scope: 'flag', :duplicate => true
      else
-        @review.upvote_by current_user, vote_scope: 'flag'
+        @review.upvote_by current_user, vote_scope: 'flag', :duplicate => true
+     end
+     redirect_to :back
+  end
+
+  def unflag
+     @review = Review.find(params[:id])
+     if current_user.admin? then
+        @review.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
      end
      redirect_to :back
   end
@@ -102,6 +111,12 @@ class ReviewsController < ApplicationController
 
     def set_course
       @cid = Course.find(params[:course_id])
+    end
+
+    def check_user
+      unless (@review.user == current_user) || (current_user.admin?)
+        redirect_to root_url, alert: "Sorry, this review belongs to someone else."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
