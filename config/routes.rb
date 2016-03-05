@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         put "dislike", to: "reviews#downvote"
         put "funny", to: "reviews#funnyvote"
         put "flag", to: "reviews#flag"
+        put "unflag", to: "reviews#unflag"
       end
   end
 
@@ -38,6 +39,8 @@ Rails.application.routes.draw do
   get 'pages/privacypolicy'
 
   get 'pages/results'
+
+  get 'pages/admin'
 
   #get 'pages/Course_Profile/:id' => 'pages#Course_Profile' , :id => 'id'
   get  'courses/show/:id' => 'courses#show', :id => 'id'

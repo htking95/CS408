@@ -1,0 +1,17 @@
+<% if current_user.admin? %>
+  <% if @reviews.blank? %>
+    <h3>No reviews to delete.</h3>
+  <% else %>
+    <% @reviews.each do |review| %>
+      <% if review.scoreFlag > 2 %>
+        <p><%= review.Comment %></p>
+        <p><%= review.created_at %></p>
+        flag: <%= review.scoreFlag %>
+        <%= link_to 'unflag', unflag_review_path(review), method: :put %>
+        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <h3>This page is only for admins.</h3>
+<% end %>
