@@ -1,4 +1,4 @@
-<%= form_for([@cid, @review]) do |f| %>
+ <%= form_for([@cid, @review]) do |f| %>
   <% if @review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -11,71 +11,50 @@
     </div>
   <% end %>
 
+<div style=" box-shadow: 0px 1px 6px black; margin-bottom: 6px; margin-top: 10px; border: 0px solid black; border-radius:10px">
+      <div class="row">            
+        <div class="col-md-12">
+<h4 style="padding-left:20px; padding-right:20px;">
+  <%= f.hidden_field :userID, "value" => current_user.id %>
+  <%= f.hidden_field :course_id, "value" => @cid %>
   <div class="form-group">
-    <%= f.label :user_id %>
-    <%= f.number_field :user_id, class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :course_id %>
-    <%= f.number_field :course_id, class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :Comment %>
+    <%= f.label "What do you wish you knew about the class?" %>
     <%= f.text_area :Comment, class:"form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :HelpfulCount %><br>
-    <%= f.number_field :HelpfulCount %>
-  </div>
-  <div class="field">
-    <%= f.label :Unhelpful %><br>
-    <%= f.number_field :Unhelpful %>
-  </div>
-  <div class="field">
-    <%= f.label :FunnyCount %><br>
-    <%= f.number_field :FunnyCount %>
-  </div>
-  <div class="field">
-    <%= f.label :FlagCount %><br>
-    <%= f.number_field :FlagCount %>
+  <div class="form-group">
+    <%= f.label "Who was the professor of the class?" %>
+    <%= f.text_field :Instructor, class:"form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :InstructorID %>
-    <%= f.number_field :InstructorID, class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :TAs %>
+    <%= f.label "Who were the Teachers Assisstants's of the class?" %>
     <%= f.text_field :TAs, class:"form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :GradeReceived %>
-    <%= f.number_field :GradeReceived, class:"form-control" %>
+    <%= f.label "What grade did you recieve in the class?" %>
+    <%= f.select(:GradeReceived, [['A', 1], ['B', 2], ['C',3], ['D',4], ['F',5]])  %>
   </div>
   <div class="field">
-    <%= f.label :HoursAWeek %><br>
-    <%= f.number_field :HoursAWeek %>
+    <%= f.label "How many hours a week did you spend on the class?" %><br>
+    <%= f.number_field :HoursAWeek, in: 0...21 %>
   </div>
   <div class="field">
-    <%= f.label :TextbookRequired %><br>
+    <%= f.label "Do you think the textbook is necissary to complete the class? (Check means yes)" %><br>
     <%= f.check_box :TextbookRequired %>
   </div>
   <div class="field">
-    <%= f.label :AttendanceRequired %><br>
+    <%= f.label "Is attendance required in the class? (Check means yes)" %><br>
     <%= f.check_box :AttendanceRequired %>
   </div>
-  <div class="form-group">
-    <%= f.label :Semester %>
-    <%= f.text_field :Semester, class:"form-control" %>
+  <dib class="field">
+  <%= f.label "When did you take the class?" %><br>
+  <%= f.select(:Semester, [['Fall', 'Fall'], ['Spring', 'Spring'], ['Summer','Summer']]) %>
+  <%= f.select :YearTaken, (Time.zone.now.year - 100)..(Time.zone.now.year + 1) %>
   </div>
-  <div class="form-group">
-    <%= f.label :YearTaken %>
-    <%= f.number_field :YearTaken, class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :DepartmentID %>
-    <%= f.number_field :DepartmentID, class:"form-control" %>
-  </div>
-  <div class="actions">
+  <div class="actions" style="padding-left:30px; padding-right:20px;">
     <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+</h4>
+</div>
+</div>
+</div>
