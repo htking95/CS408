@@ -39,7 +39,6 @@ gem 'acts_as_votable'
 # gem 'capistrano-rails', group: :development
 
 gem 'httparty'
-gem 'best_in_place'
 gem 'rails_12factor', group: :production
 gem 'pg', group: :production
 gem 'carrierwave'
