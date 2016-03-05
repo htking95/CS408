@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20160304030321) do
     t.integer  "Unhelpful"
     t.integer  "FunnyCount"
     t.integer  "FlagCount"
-    t.integer  "InstructorID"
+    t.string  "Instructor"
     t.string   "TAs"
     t.integer  "GradeReceived"
     t.integer  "HoursAWeek"
