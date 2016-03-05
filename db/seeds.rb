@@ -7,12 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 require 'httparty'
-
+=begin
 responce = HTTParty.get(URI.parse(URI.encode("http://api.purdue.io/odata/Instructors")))
 for i in responce["value"]
 	Instructor.create("name" => i["Name"], "email" => i["Email"])
 end
-
+=end
 
 responce = HTTParty.get(URI.parse(URI.encode("http://api.purdue.io/odata/Subjects")))
 for r in responce["value"]
