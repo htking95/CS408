@@ -61,6 +61,36 @@ class AnswersController < ApplicationController
     end
   end
 
+  def upvote
+     @answer = Answer.find(params[:id])
+     if current_user.voted_up_on? @answer then
+        @answer.unvote_by current_user
+     else
+        @answer.upvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def downvote
+     @answer = Answer.find(params[:id])
+     if current_user.voted_down_on? @answer then
+        @answer.unvote_by current_user
+     else
+        @answer.downvote_by current_user
+     end
+     redirect_to :back
+  end
+
+  def flag
+     @answer = Answer.find(params[:id])
+     if current_user.voted_on? @answer, vote_scope: 'flag' then
+        @answer.unvote_by current_user, vote_scope: 'flag'
+     else
+        @answer.upvote_by current_user, vote_scope: 'flag'
+     end
+     redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question

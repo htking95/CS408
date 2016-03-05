@@ -24,6 +24,14 @@ Rails.application.routes.draw do
       end
   end
 
+  resources :answers do
+      member do
+        put "like", to: "answers#upvote"
+        put "dislike", to: "answers#downvote"
+        put "flag", to: "answers#flag"
+      end
+  end
+
   get 'pages/home'
 
   get 'pages/contact'
