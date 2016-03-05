@@ -34,4 +34,40 @@ class Course < ActiveRecord::Base
 	    end
 	end
 
+	def averageGrade
+		total = 0
+		puts "HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA"
+		count = 0
+		if self.reviews == nil then
+			return nil
+		end
+		self.reviews.each do |r|
+			puts "DEEZ NUITZ"
+			puts r.GradeReceived
+			count = count + 1
+			total = total + r.GradeReceived
+		end
+
+		if count == 0 then
+			return nil
+		end
+		
+		avgG = total/count
+		puts "avg"
+		puts avgG
+		
+		case avgG
+      	when 1
+        	return 'A'
+      	when 2
+        	return 'B'
+      	when 3
+        	return 'C'
+      	when 4
+        	return 'D'
+      	when 5
+        	return 'F'
+      	end
+	end	
+
 end
