@@ -36,13 +36,13 @@ class Course < ActiveRecord::Base
 
 	def averageGrade
 		total = 0
-		puts "HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA"
+		puts "Begining of average Grade func"
 		count = 0
 		if self.reviews == nil then
 			return nil
 		end
 		self.reviews.each do |r|
-			puts "DEEZ NUITZ"
+			puts "Looping through reviews"
 			puts r.GradeReceived
 			count = count + 1
 			total = total + r.GradeReceived

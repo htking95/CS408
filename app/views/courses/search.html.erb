@@ -61,7 +61,7 @@
 			    			<% end %>
 			    		</div>
 			    		<div align="right" class="lastEdited">
-			    			<% if course.lastEdited.blank? %>
+			    			<% if course.updated_at.blank? %>
 			    				Last edited: n/a
 			    			<% else %>
 			    				Last edited: <%= course.lastEdited %>
