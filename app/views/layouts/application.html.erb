@@ -23,12 +23,12 @@
 
 <% if current_page?('/pages/home') || current_page?('/') %>
     <%#= render 'layouts/home_header' %>
-    <div style="">
+    <div style="background-color: white">
 		<%= yield %>
 	</div>
 <% else %>
     <%= render 'layouts/header'%>
-    <div style="margin-top: 7px">
+    <div style="margin-top: 7px;background-color: white">
 		<%= yield %>
 	</div>
 <% end %>

@@ -39,7 +39,7 @@ gem 'acts_as_votable'
 
 gem 'httparty'
 gem 'best_in_place'
-
+gem 'humanize_boolean'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

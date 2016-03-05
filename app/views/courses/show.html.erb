@@ -13,7 +13,36 @@
     });
   </script>
 
-<%= @course.name %><br>
+<div style="padding-left:20px; padding-right:20px;">
+<h1 style="padding-top:20px">
+  <%= @course.name %>
+</h1>
+<h2>
+    <%= @course.fullName %>
+</h2>
+<br>
+
+  <% if user_signed_in? %>
+    Description: 
+    <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea%>
+    <br>
+    <strong>*If this description is not accurate, please edit it or write a new one.</strong>
+
+  <% else %>
+    Description:
+    <% if @course.description.empty? then %>
+      No description of this class has been written yet. Login to write one!
+    <% else %>
+      <%= @course.description %> <br>
+      <strong>*If this description is not accurate, please login and write a new one!</strong>
+    <% end %>
+  <% end %>
+  
+  <br>
+  Average Grade:
+  <%= @course.averageGrade %>
+
+<br>
 <% @course.update_column(:ratings, @course.average_rate) %>
 
 <span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Difficulty" data-content="How hard was the class? 1 being the easiest, 5 being the hardest."><strong class="">Difficulty </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
@@ -25,13 +54,7 @@
 <span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Enjoyment" data-content="How much did you like the class? 1 being the least, 5 being the most."><strong class="">Enjoyment </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
 <%= rating_for @course, "enjoyment", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
 
-<% if user_signed_in? %>
-  description
-  <%= best_in_place @course, :description %>
-<% else %>
-  <%= @course.description %>
-<% end %>
-
+<br>
 
 <%= link_to "Write a Review", new_course_review_path(:course_id => @course.id), class: "btn btn-primary" %>
 
@@ -39,40 +62,117 @@
   <h3>No reviews yet. Be the first to write one!</h3>
 <% else %>
   <% @reviews.each do |review| %>
-    <p><%= review.Comment %></p>
-    <p><%= review.created_at %></p>
-    <%= link_to 'upvote', like_review_path(review), method: :put %>
-    <%= link_to 'downvote', dislike_review_path(review), method: :put %>
-    <%= link_to 'funnyvote', funny_review_path(review), method: :put %>
-    <%= link_to 'flag', flag_review_path(review), method: :put %>
-    score: <%= review.scoreReview %>
-    funniness: <%= review.scoreFunny %>
-    flag: <%= review.scoreFlag %>
+    <div style=" box-shadow: 0px 1px 6px black; margin-bottom: 6px; margin-top: 10px; border: 0px solid black; border-radius:10px">
+      <div class="row" style=":adding-left:20px; padding-right:20px;">            
+        <div class="col-md-12">
+          <p>Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
+
+          <p>
+              Professor: <%= review.Instructor %>
+          </p>
+          <p>
+            Teachers Assistants: <%= review.TAs %>
+          </p>
+          <p>Overall Comments: 
+            <%= review.Comment %>
+          </p>
+          <p>
+            <h5>
+            Grade Recieved: <%= review.getGrade(review.GradeReceived)%> <br>
+            Hours spend a week: <%= review.HoursAWeek %>
+            </h5>
+          </p>
+          <p>
+            Was the textbook required? <%= review.TextbookRequired  ? 'Yes' : 'No'  %> <br>
+            Was attendance requred in the class <%= review.AttendanceRequired ? 'Yes' : 'No'%>
+          </p>
+          <p>
+            This review was written for the course during the <%= review.Semester %> semester in <%= review.YearTaken %>
+          </p>
+
+          <%= link_to 'upvote', like_review_path(review), method: :put %>  
+          <%= link_to 'downvote', dislike_review_path(review), method: :put %>
+          <%= link_to 'funnyvote', funny_review_path(review), method: :put %>
+          <%= link_to 'flag', flag_review_path(review), method: :put %>
+          <br>
+          Rating of the review (Combined upvotes and downvotes): <%= review.scoreReview %>
+          <br>
+          How many people thought the review was funny: <%= review.scoreFunny %>
+          <br>
+          How many people have flagged the review: <%= review.scoreFlag %>
+        </div>
+      </div>
+    </div>
   <% end %>
 <% end %>
 
 
-<%= form_for @course.questions.new do |f| %>
-    <%= f.text_field :question %>
-    <%= f.hidden_field :course_id, "value" => @course.id %>
-    <%= f.hidden_field :userID, "value" => current_user.id %>
-    <%= f.submit "Ask Question" %>
+<h1>
+<%= "Questions" %>
+</h1>
+
+<% if user_signed_in? %>
+  <%= form_for @course.questions.new do |f| %>
+      <div class="field">
+      <%= f.text_field :question, class: 'form-control', placeholder: "Ask a Question about the Class", :maxlength => "240", rows: 1 %>
+      <%= f.hidden_field :course_id, "value" => @course.id %>
+      <%= f.hidden_field :userID, "value" => current_user.id %>
+    </div>
+    <%= f.submit "Ask Question", class: "btn btn-success"%>  
+  <% end %>
 <% end %>
 
 <% @course.questions.each do |q| %>
   <% if !q.question.nil? %>
-      <%= q.question %>
+    <div style=" box-shadow: 0px 1px 6px black; margin-bottom: 6px; margin-top: 10px; border: 0px solid black; border-radius:10px">
+      <div class="row">            
+        <div class="col-md-12">
+          <h4 style="padding-left:20px; padding-right:20px;">
+            <small>
+              <%= q.created_at.strftime("%B %d, %Y") %>
+            </small>
+            <p style="padding-left:20px; padding-right:20px;">   
+             <%= q.question %>
+            </p> 
+          </h4>
+
       <%  q.answers.each do |a| %>
-         <%= a.answer %>
+      <div style=" box-shadow: 0px 1px 6px black; margin-bottom: 6px; margin-top: 10px; border: 0px solid black; border-radius: 10px; padding-left: 20px; padding-right: 20px">
+      <div class="row">            
+        <div class="col-md-12">
+          <h4 style="padding-left:20px; padding-right:20px;">
+            <small>
+              <%= a.created_at.strftime("%B %d, %Y") %>
+            </small>
+            <p style="padding-left:20px; padding-right:20px;">   
+                <%= a.answer %>
+            </p> 
+          </h4>
+        </div>
+      </div>
+      </div>
+
+
       <% end %>
-     <%= form_for q.answers.new do |f| %>
-       <%= f.text_field :answer %>
-       <%= f.submit "Answer Question" %>
-       <%= f.hidden_field :question_id, "value" => @question.id %>
-       <%= f.hidden_field :userID, "value" => current_user.id %>
+      <% if user_signed_in? %>
+        <%= form_for q.answers.new do |f| %>
+          <%= f.text_field :answer,  class: 'form-control', placeholder: "Answer this question", :maxlength => "10000", rows: 4 %>
+          <%= f.submit "Answer Question", class: "btn btn-confirm" %>
+          <%= f.hidden_field :question_id, "value" => q.id %>
+          <%= f.hidden_field :userID, "value" => current_user.id %>
+        <% end %>
      <% end %>
   <% end %> 
+
+        </div> 
+      </div>
+   </div>
+
+
+
 <% end %>
+</div>
+
 
 
 
