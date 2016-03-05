@@ -2,7 +2,6 @@
   var aboutMe = "";
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover(); 
-        $("#selector").select2();
         about_me = document.getElementById("about_me").getAttribute("data-about-me");
         if(about_me != "" && about_me != null){
           document.getElementById("about_me").innerHTML = about_me;
@@ -30,7 +29,7 @@
 
   <% else %>
     Description:
-    <% if @course.description.blank? then %>
+    <% if (@course.description.nil? || @course.description.empty?) then %>
       No description of this class has been written yet. Login to write one!
     <% else %>
       <%= @course.description %> <br>
@@ -45,6 +44,7 @@
 <br>
 <% @course.update_column(:ratings, @course.average_rate) %>
 
+
 <span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Difficulty" data-content="How hard was the class? 1 being the easiest, 5 being the hardest."><strong class="">Difficulty </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
 <%= rating_for @course, "difficulty", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
 
@@ -55,7 +55,6 @@
 <%= rating_for @course, "enjoyment", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
 
 <br>
-
 <%= link_to "Write a Review", new_course_review_path(:course_id => @course.id), class: "btn btn-primary" %>
 
 <% if @reviews.blank? %>
@@ -145,7 +144,10 @@
               <%= a.created_at.strftime("%B %d, %Y") %>
             </small>
             <p style="padding-left:20px; padding-right:20px;">   
-                <%= a.answer %>
+                <%= a.answer %><br>
+                <%= link_to 'upvote', like_answer_path(a), method: :put %>
+                <%= link_to 'downvote', dislike_answer_path(a), method: :put %>(<%= a.scoreAnswer %>)
+                <%= link_to 'flag', flag_answer_path(a), method: :put %>(<%= a.scoreFlag %>)
             </p> 
           </h4>
         </div>
@@ -167,23 +169,5 @@
         </div> 
       </div>
    </div>
-
-
-
 <% end %>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

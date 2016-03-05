@@ -22,7 +22,10 @@ class PagesController < ApplicationController
       #@userreviews = @userprofile.userreviews.all
       #@userreview = @userprofile.userreviews.build
   end
-
+  
+  def admin
+    @reviews = Review.all
+  end
 
 
 end

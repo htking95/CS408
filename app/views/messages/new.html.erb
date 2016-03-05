@@ -10,7 +10,7 @@
     <%= form_for @message, url: contact_path do |message_form| %>
       <fieldset>
         <div class="field">
-          <%= message_form.text_field :email, placeholder: "Your email", class: "form-control" %>
+          <%= message_form.text_field :email, :value => current_user.email, class: "form-control" %>
         </div>
 
         <div class="field">
