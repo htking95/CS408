@@ -157,6 +157,7 @@
 
       <% end %>
       <% if user_signed_in? %>
+      <br>
         <%= form_for q.answers.new do |f| %>
           <%= f.text_field :answer,  class: 'form-control', placeholder: "Answer this question", :maxlength => "10000", rows: 4 %>
           <%= f.submit "Answer Question", class: "btn btn-confirm" %>
