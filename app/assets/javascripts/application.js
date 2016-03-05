@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.purr
-//= require turbolinks
-//= require_tree .
 //= require jquery.raty
 //= require ratyrate
 //= require best_in_place
+//= require turbolinks
