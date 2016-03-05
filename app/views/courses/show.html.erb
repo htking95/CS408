@@ -30,7 +30,7 @@
 
   <% else %>
     Description:
-    <% if @course.description.empty? then %>
+    <% if @course.description.blank? then %>
       No description of this class has been written yet. Login to write one!
     <% else %>
       <%= @course.description %> <br>
