@@ -30,19 +30,18 @@
 		text-decoration: none;
 	}
 	#topCourseEntry{
-		background-color: gold;
+		background-color: #B1810B;
 		color: black;
 	}
 	.result {
-		background-color: gold;
-		box-shadow: 2px 2px 20px white;
+		background-color: #B1810B;
+		box-shadow: 2px 2px 20px black;
 		border-radius: 5px;
 	}
 	.result:hover{
-		box-shadow: 6px 6px 15px white;
+		box-shadow: 6px 6px 15px black;
 	}
 	.resultRow {
-		background-color: black;
 		margin: 5px 0px 5px 0px;
 	}
 	.description {
@@ -52,7 +51,7 @@
 		overflow: auto;
 		margin: 5px 5px 0px 5px;
 		padding: 5px;
-		background-color: gold;
+		background-color: #B1810B;
 	}
 	.descriptionBox {
 		border: 1px solid black;
@@ -74,119 +73,152 @@
 	.courseLink:visited{
 		color:black;
 	}
+	#myHeader {
+        /*background-color: #B1810B;*/
+        background-image: url('/gray3.jpg');
+        margin: 0px 0px 10px 0px;
+        box-shadow: 3px 3px 10px black;
+        padding: 10px;
+        color: #B1810B;
+    }
+    #body {
+    	background-image: url('/gray2.gif');
+    	padding-right:5%;
+    	padding-left:5%;
+    	/*margin: 0px 15px 0px 15px;*/
+    }
+    .headerText {
+    	text-shadow: 3px 3px black;
+    }
+    #main {
+    	box-shadow: 3px 3px 10px black;
+    }
 </style>
-<div align="center" style="background-image: url('/carbon2.jpg') ; color: gold; padding: 20px">
-	<h1><b><i>RATE MY COURSES</i></b></h1>
-</div>
 
-<div style="background-color: gold; border: 15px solid black">
-<div class="container-fluid" align="center" style="">
-	<div class="row" style="">
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			&nbsp
-		</div>
-		<div class="col-xs-8">
-	      	<%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
-	      		<p>
-	      			<%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; width: 80%; margin-top: 8px; border: 5px solid gray; background-color: white; color: black" %>
-	      			<%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; margin-top: 8px; border: 5px solid gray; height: 40px") do %>
-	      				<span class="glyphicon glyphicon-search" aria-hidden="true" style="padding-top: -5px"></span>
-	      			<% end %>
-	      		</p>
-	      	<% end %>
-
-	    </div>
-	    <div class="col-xs-2" style="background-color: blue">
-			<div style="margin-top: 15px">
-			<% if user_signed_in? %>
-				<ul align="left" style="background-color: red">
-					<li class="dropdown" align="left">
-	              		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	                		<span class="glyphicon glyphicon-user"></span>
-	                		<%= current_user.email%>
-		                	<span class="caret"></span>
-		              	</a>
-		            	<ul class="dropdown-menu">
-			            	<li><a href="/users/edit" data-no-turbolink="true">Edit Profile <span class="glyphicon glyphicon-pencil"></span></a></li>
-			                <li role="separator" class="divider"></li>
-			                <li><a href="/ContactUs">Contact Us <span class="glyphicon glyphicon-question-sign"></span></a></li>
-			            	<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-		            	</ul>
-	            	</li>
-            	</ul>
-			<% else %>
-				<h4><a href="/users/sign_up">Sign Up</a> <a href="/users/sign_in">Log In</a></h4>
-			<% end %>
-			</div>
-		</div>
-    </div>
-</div>
-</div>
-
-<div style="background-image: url('/band1.jpg')">
-<div class="container" style="height: 200px;">
-	<div class="row" style="margin: 10px;">
-		<div class="col-xs-4 adbox">
-			<div class="adcontent" style="color:#FF5757"><img src="/boximg_2.jpg" height="100%" style="max-width:100%" alt="boximage1"></div>
-		</div>
-		<div class="col-xs-4 adbox">
-			<div class="adcontent" style="color: #2B0099"><img src="/boximg_1.jpg" height="100%" style="max-width:100%" alt="boximage2"></div>
-		</div>
-		<div class="col-xs-4 adbox">
-			<div class="adcontent" style="color: #125900"><img src="/boximg_3.jpg" height="100%" style="max-width:100%" alt="boximage3"></div>
-		</div>
+<div class="" id="body">
+	<!-- Header -->
+	<div class="jumbotron" id="myHeader">
+	        <div style="height: 30px">&nbsp</div>
+	        <h1 class="headerText" style="color:white;"><b>Rate My Classes</b></h1>
+	        <h4 class="headerText">For use students at Purdue University</h4>
 	</div>
-</div>
-</div>
 
-<div class="container-fluid" style="background-color: black; min-height: 500px; padding: 0px 50px 0px 50px">
-	<div class="row" style="color: gold; background-color: black">
-		<div class="col-xs-12" align="center">
-			<h3>#Top Rated Courses</h3>
-		</div>
-	</div>
-	<div class="row" align="center" style="background-color: black; color: white">
-		<div class="col-xs-1">
-			&nbsp
-		</div>
-
-		<div class="col-xs-10">
-			<div class="container-fluid">
-				<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).each do |course| %>
-					<div class="row resultRow">
-						<a href="/courses/<%=course.id%>" class="courseLink">
-						<div class="col-xs-12 result">
-						    <div><h3><b><%= course.fullName %> : <%= course.name %></b></h3></div>
-						    <div><h5><b><%= course.departmentFull %> Department (<%= course.department %>)</b></h5></div>
-						    <hr style="margin:0px; border: 1px solid white">
-						    <div class="" style="padding-top: 4px">
-						    	Course Description:
-						    	<div class="descriptionBox">
-						    		<div class="description">
-						    			<% if course.description.blank? %>
-						    				There is no description for this course yet. If you are familiar with this course, please write a review for this course and add to the description yourself!
-						    			<% else %>
-						    				<%= course.description %>
-						    			<% end %>
-						    		</div>
-						    		<div align="right" class="lastEdited">
-						    			<% if course.lastEdited.blank? %>
-						    				Last edited: n/a
-						    			<% else %>
-						    				Last edited: <%= course.lastEdited %>
-						    			<% end %>
-						    		</div>
-						    	</div>
-						    </div>
-						</div>
-						</a>
+	<!-- Main -->
+	<div id="main">
+		<!-- Searchbar -->
+		<div style="background-color: #B1810B; border: 15px solid black">
+			<div class="container-fluid" style="">
+				<div class="row" style="">
+					<div class="col-xs-0 col-sm-1 col-md-3">
+						&nbsp
 					</div>
-					<br>
-				<% end %>
+					<div class="col-xs-12 col-sm-7 col-md-6">
+				      	<%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
+				      		<p>
+				      			<%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; width: 85%; margin-top: 8px; border: 5px solid gray; background-color: white; color: black" %>
+				      			<%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; margin-top: 8px; border: 5px solid gray; height: 40px") do %>
+				      				<span class="glyphicon glyphicon-search" aria-hidden="true" style="padding-top: -5px"></span>
+				      			<% end %>
+				      		</p>
+				      	<% end %>
+				    </div>
+				    <div class="col-xs-12 col-sm-4 col-md-3">
+						<div style="margin-top: 15px">
+						<% if user_signed_in? %>
+							<ul align="right" style="color:white">
+								<li class="dropdown" align="left">
+				              		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				                		<span class="glyphicon glyphicon-user"></span>
+				                		<%= current_user.email%>
+					                	<span class="caret"></span>
+					              	</a>
+					            	<ul class="dropdown-menu">
+						            	<li><a href="/users/edit" data-no-turbolink="true">Edit Profile <span class="glyphicon glyphicon-pencil"></span></a></li>
+						                <li role="separator" class="divider"></li>
+						                <li><a href="/ContactUs">Contact Us <span class="glyphicon glyphicon-question-sign"></span></a></li>
+						            	<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+					            	</ul>
+				            	</li>
+			            	</ul>
+						<% else %>
+							<h4><a href="/users/sign_up">Sign Up</a> <a href="/users/sign_in">Log In</a></h4>
+						<% end %>
+						</div>
+					</div>
+			    </div>
 			</div>
-		</div>
-		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			&nbsp
-		</div>
-	</div>
+		</div> <!-- End Searchbar -->
+
+		<!-- Ad boxes -->
+		<div style="background-image: url('/band1.jpg')">
+			<div class="container" style="height: 200px;">
+				<div class="row" style="margin: 10px;">
+					<div class="col-xs-4 adbox">
+						<div class="adcontent" style="color:#FF5757"><img src="/boximg_2.jpg" height="100%" style="max-width:100%" alt="boximage1"></div>
+					</div>
+					<div class="col-xs-4 adbox">
+						<div class="adcontent" style="color: #2B0099"><img src="/boximg_1.jpg" height="100%" style="max-width:100%" alt="boximage2"></div>
+					</div>
+					<div class="col-xs-4 adbox">
+						<div class="adcontent" style="color: #125900"><img src="/boximg_3.jpg" height="100%" style="max-width:100%" alt="boximage3"></div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- end Ad boxes -->
+
+		<!-- Top rated Courses -->
+		<div class="container-fluid" style="background-color: white; min-height: 500px; padding: 0px 50px 0px 50px">
+			<div class="row">
+				<div class="col-xs-1">&nbsp</div>
+				<div class="col-xs-10" align="center" style="color: #B1810B">
+					<h3 class=""><b>#Top Rated Courses</b></h3>
+				</div>
+				<div class="col-xs-1">&nbsp</div>
+			</div>
+			<div class="row" align="center" style="background-color: white; color: white">
+				<div class="col-xs-1">
+					&nbsp
+				</div>
+
+				<div class="col-xs-10">
+					<div class="container-fluid">
+						<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).each do |course| %>
+							<div class="row resultRow">
+								<a href="/courses/<%=course.id%>" class="courseLink">
+								<div class="col-xs-12 result">
+								    <div><h3><b><%= course.fullName %> : <%= course.name %></b></h3></div>
+								    <div><h5><b><%= course.departmentFull %> Department (<%= course.department %>)</b></h5></div>
+								    <hr style="margin:0px; border: 1px solid white">
+								    <div class="" style="padding-top: 4px">
+								    	Course Description:
+								    	<div class="descriptionBox">
+								    		<div class="description">
+								    			<% if course.description.blank? %>
+								    				There is no description for this course yet. If you are familiar with this course, please write a review for this course and add to the description yourself!
+								    			<% else %>
+								    				<%= course.description %>
+								    			<% end %>
+								    		</div>
+								    		<div align="right" class="lastEdited">
+								    			<% if course.lastEdited.blank? %>
+								    				Last edited: n/a
+								    			<% else %>
+								    				Last edited: <%= course.updated_at %>
+								    			<% end %>
+								    		</div>
+								    	</div>
+								    </div>
+								</div>
+								</a>
+							</div>
+							<br>
+						<% end %>
+					</div>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+					&nbsp
+				</div>
+			</div>
+		</div><!-- End Top Rated Courses -->
+	</div><!-- End of Main -->
 </div>
