@@ -54,7 +54,7 @@ class AnswersController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
-    @answer.answer
+    @answer.destroy
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
@@ -87,6 +87,14 @@ class AnswersController < ApplicationController
         @answer.unvote_by current_user, vote_scope: 'flag'
      else
         @answer.upvote_by current_user, vote_scope: 'flag'
+     end
+     redirect_to :back
+  end
+
+  def unflag
+     @answer = Answer.find(params[:id])
+     if current_user.admin? then
+        @answer.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
      end
      redirect_to :back
   end
