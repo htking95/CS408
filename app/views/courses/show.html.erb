@@ -2,13 +2,7 @@
   var aboutMe = "";
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover(); 
-        about_me = document.getElementById("about_me").getAttribute("data-about-me");
-        if(about_me != "" && about_me != null){
-          document.getElementById("about_me").innerHTML = about_me;
-        }
-    });
-    $('#messageModal').on('shown.bs.modal', function () {
-      $('#messageModal').focus()
+        $(".best_in_place").best_in_place();
     });
   </script>
 
@@ -29,7 +23,7 @@
 
   <% else %>
     Description:
-    <% if (@course.description.nil? || @course.description.empty?) then %>
+    <% if (@course.description.blank?) then %>
       No description of this class has been written yet. Login to write one!
     <% else %>
       <%= @course.description %> <br>
@@ -65,6 +59,10 @@
       <div class="row" style=":adding-left:20px; padding-right:20px;">            
         <div class="col-md-12">
           <p>Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
+
+          <p>
+              <%= link_to 'Download Syllabus', review.syllabus_url %>
+          </p>
 
           <p>
               Professor: <%= review.Instructor %>
