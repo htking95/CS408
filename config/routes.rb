@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         put "like", to: "answers#upvote"
         put "dislike", to: "answers#downvote"
         put "flag", to: "answers#flag"
+        put "unflag", to: "answers#unflag"
       end
   end
 
