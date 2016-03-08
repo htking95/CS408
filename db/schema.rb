@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304030321) do
+ActiveRecord::Schema.define(version: 20160304194450) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "answer"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20160304030321) do
     t.integer  "Unhelpful"
     t.integer  "FunnyCount"
     t.integer  "FlagCount"
-    t.string  "Instructor"
+    t.string   "Instructor"
     t.string   "TAs"
     t.integer  "GradeReceived"
     t.integer  "HoursAWeek"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160304030321) do
     t.datetime "updated_at",         null: false
     t.integer  "user_id"
     t.integer  "course_id"
+    t.string   "syllabus"
   end
 
   create_table "users", force: :cascade do |t|
@@ -162,3 +163,5 @@ ActiveRecord::Schema.define(version: 20160304030321) do
 
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+
+end

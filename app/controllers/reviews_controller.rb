@@ -121,6 +121,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:UserID, :CourseID, :Comment, :HelpfulCount, :Unhelpful, :FunnyCount, :FlagCount, :Instructor, :TAs, :GradeReceived, :HoursAWeek, :TextbookRequired, :AttendanceRequired, :Semester, :YearTaken, :DepartmentID)
+      params.require(:review).permit(:UserID, :CourseID, :Comment, :HelpfulCount, :Unhelpful, :FunnyCount, :FlagCount, :InstructorID, :TAs, :GradeReceived, :HoursAWeek, :TextbookRequired, :AttendanceRequired, :Semester, :YearTaken, :DepartmentID, :syllabus)
     end
 end
