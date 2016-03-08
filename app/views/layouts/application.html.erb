@@ -10,7 +10,7 @@
  	<%= render 'layouts/bootstrapstuff' %>
 </head>
 
-<body style="background-color: black">
+<body style="background-image: url('/gray2.gif')">
 
 <% flash.each do |name, msg| %>
 	<% if msg.is_a?(String) %>
@@ -23,12 +23,12 @@
 
 <% if current_page?('/pages/home') || current_page?('/') %>
     <%#= render 'layouts/home_header' %>
-    <div style="margin: 7px 0px 20px 0px; background-color: white">
+    <div style="margin: 0px 0px 40px 0px; background-image: url('/gray2.gif');">
 		<%= yield %>
 	</div>
 <% else %>
     <%= render 'layouts/header'%>
-    <div style="margin: 7px 0px 20px 0px; background-color: white">
+    <div style="margin: 7px 0px 40px 0px; background-image: url('/gray2.gif');">
 		<%= yield %>
 	</div>
 <% end %>
