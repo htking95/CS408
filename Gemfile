@@ -47,6 +47,8 @@ gem "figaro"
 gem 'best_in_place', '~> 3.0.1'
 gem 'humanize_boolean'
 gem 'puma'
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

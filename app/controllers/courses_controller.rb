@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
 
 	def search
 		if params[:search].present?
-			@courses = Course.search(params[:search])
+			@courses = Course.search(params[:search], page: params[:page], per_page: 10)
 		else
 			@courses = nil
 		end
