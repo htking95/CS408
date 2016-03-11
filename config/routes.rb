@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :departments do
+    collection do
+      get 'search'
+    end
+  end
 
   resources :reviews do
       member do
