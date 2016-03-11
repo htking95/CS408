@@ -45,13 +45,13 @@
     <%= f.label "Is attendance required in the class? (Check means yes)" %><br>
     <%= f.check_box :AttendanceRequired %>
   </div>
-  <dib class="field">
+  <div class="field">
   <%= f.label "When did you take the class?" %><br>
   <%= f.select(:Semester, [['Fall', 'Fall'], ['Spring', 'Spring'], ['Summer','Summer']]) %>
   <%= f.select :YearTaken, (Time.zone.now.year - 100)..(Time.zone.now.year + 1) %>
   </div>
   <div class="form-group">
-    <%= f.label :syllabus %>
+    <%= f.label "Upload a syllabus" %>
     <%= f.file_field :syllabus, class:"form-control" %>
   </div>
   <div class="actions" style="padding-left:30px; padding-right:20px;">

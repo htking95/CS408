@@ -85,6 +85,6 @@
 			</div>
 			<br>
 		<% end %>
+		<%= will_paginate @courses, renderer: BootstrapPagination::Rails %>
 	<% end %>
-	<%= will_paginate @courses, renderer: BootstrapPagination::Rails %>
 </div>

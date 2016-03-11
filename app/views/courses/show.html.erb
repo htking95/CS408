@@ -62,7 +62,11 @@
           <p>Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
 
           <p>
-              <%= link_to 'Download Syllabus', review.syllabus_url %>
+              <% if !review.syllabus.to_s.eql? "" %>
+                <%= link_to 'Download Syllabus', review.syllabus_url %>
+              <% else %>
+                &nbsp
+              <% end %>
           </p>
 
           <p>
