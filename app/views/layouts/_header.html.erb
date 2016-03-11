@@ -112,6 +112,9 @@
                 <li><a href="/users/edit" data-no-turbolink="true">Edit Profile<span class="glyphicon pull-right glyphicon-pencil"></span></a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/ContactUs">Contact Us<span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
+                <% if current_user.admin? %>
+                  <li><a href="/pages/admin">Admin<span class="glyphicon pull-right glyphicon-king"></span></a></li>
+                <% end %>
               </ul>
             </li>
             <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "signOut"; %></li>
