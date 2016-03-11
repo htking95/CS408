@@ -52,11 +52,11 @@ class CoursesController < ApplicationController
 					pos += 1
 					newparams[pos] = "0"
 				end
-				@courses = Course.search(newparams)
+				@courses = Course.search(newparams, page: params[:page], per_page: 10)
 			else
 				# uses normal search results if no integers
 				#  are present in the search params
-				@courses = Course.search(params[:search])
+				@courses = Course.search(params[:search], page: params[:page], per_page: 10)
 			end
 		else
 			@courses = nil
