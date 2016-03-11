@@ -4,10 +4,10 @@ class Answer < ActiveRecord::Base
 	acts_as_votable
 
 	def scoreAnswer
-    	self.get_upvotes.size - self.get_downvotes.size
+    	self.get_upvotes.sum(:vote_weight) - self.get_downvotes.sum(:vote_weight)
   	end
 
   	def scoreFlag
-  		self.find_votes_for(:vote_scope => 'flag').size
+  		self.get_upvotes(:vote_scope => 'flag').sum(:vote_weight) - self.get_downvotes(:vote_scope => 'flag').sum(:vote_weight)
   	end
 end

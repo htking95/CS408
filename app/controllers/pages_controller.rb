@@ -25,6 +25,7 @@ class PagesController < ApplicationController
   
   def admin
     @reviews = Review.all
+    @answers = Answer.all
   end
 
 
