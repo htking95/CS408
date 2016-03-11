@@ -118,7 +118,7 @@
       <div style="padding: 10px; margin-left: 5px;">
         <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea%>
       </div>
-      <div style="font-size:x-small" align="center"><strong>*If this description is not accurate, please edit it or write a new one.</strong></div>
+      <div style="font-size:x-small" align="center"><strong>*If this description is not accurate, please edit by clicking on it or write a new one.</strong></div>
     </div>
   <% else %>
 
@@ -187,7 +187,11 @@
             </div>
 
             <div class="col-xs-6" align="right" style="border-bottom: 1px solid black">
+              <% if review.syllabus.to_s.eql? ""%>
+                &nbsp
+              <% else %>
                 <%= link_to 'Download Syllabus', review.syllabus_url, class: "download" %>
+              <% end %>
             </div>
                 
             <div class="col-xs-12">

@@ -119,6 +119,16 @@
     	color: white !important;
     	text-decoration: none !important;
     }
+
+    .sign {
+    	color: white !important;
+    	margin-right: 8px;
+    }
+    .sign:hover {
+    	color: white !important;
+    	background-color: transparent;
+    	margin-right: 8px;
+    }
 </style>
 
 <div class="container" id="body">
@@ -126,7 +136,7 @@
 	<div class="jumbotron" id="myHeader">
 	        <div style="height: 30px">&nbsp</div>
 	        <h1 class="headerText" style="color:white;"><b>Rate My Classes</b></h1>
-	        <h4 class="headerText">For use students at Purdue University</h4>
+	        <h4 class="headerText">For use of students at Purdue University</h4>
 	</div>
 
 	<!-- Main -->
@@ -167,7 +177,9 @@
 				            	</li>
 			            	</ul>
 						<% else %>
-							<h4><a href="/users/sign_up">Sign Up</a> <a href="/users/sign_in">Log In</a></h4>
+							<div align="right">
+								<a class="sign" href="/users/sign_up">Sign Up</a> <a class="sign" href="/users/sign_in">Log In</a>
+							</div>
 						<% end %>
 						</div>
 					</div>
@@ -208,11 +220,13 @@
 
 				<div class="col-xs-10">
 					<div class="container-fluid">
-						<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).each do |course| %>
+						<%= @i = 1 %>
+						<% @courses.sort_by{|x| x[:ratings] }.reverse.first(10).each do |course| %>
 							<div class="row resultRow">
 								<a href="/courses/<%=course.id%>" class="courseLink">
 								<div class="col-xs-12 result">
-								    <div><h3><b><%= course.fullName %> : <%= course.name %></b></h3></div>
+									<div align="left" style="font-size:normal"><b>#<%= @i %></b></div>
+								    <div><h3 style="margin-top: 5px"><b><%= course.fullName %> : <%= course.name %></b></h3></div>
 								    <div><h5><b><%= course.departmentFull %> Department (<%= course.department %>)</b></h5></div>
 								    <hr style="margin:0px; border: 1px solid white">
 								    <div class="" style="padding-top: 4px">
@@ -237,6 +251,7 @@
 								</div>
 								</a>
 							</div>
+							<%= @i+=1 %>
 							<br>
 						<% end %>
 					</div>

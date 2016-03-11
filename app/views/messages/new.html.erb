@@ -26,7 +26,11 @@
     <%= form_for @message, url: contact_path do |message_form| %>
       <fieldset>
         <div class="field">
-          <%= message_form.text_field :email, :value => current_user.email, class: "form-control" %>
+          <% if user_signed_in? %>
+            <%= message_form.text_field :email, :value => current_user.email, class: "form-control" %>
+          <% else %>
+            <%= message_form.text_field :email, class: "form-control", placeholder: "Email" %>
+          <% end %>
         </div>
 
         <div class="field">

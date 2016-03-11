@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div style=" background-color:#BAA892; margin-bottom: 10px; margin-top: 10px; border: 0px solid black;">
+  <div style="background-color:#BAA892; margin-bottom: 10px; margin-top: 10px; border: 0px solid black;">
     <div class="row">            
       <div class="col-md-12">
         <h4 style="padding-left:20px; padding-right:20px;">
           <%= f.hidden_field :userID, "value" => current_user.id %>
           <%= f.hidden_field :course_id, "value" => @cid %>
           <div class="form-group">
-            <%= f.label "What do you wish you knew about the class?" %>
+            <%= f.label "Review" %>
             <%= f.text_area :Comment, class:"form-control" %>
           </div>
           <div class="form-group">
@@ -26,7 +26,7 @@
             <%= f.text_field :Instructor, class:"form-control" %>
           </div>
           <div class="form-group">
-            <%= f.label "Who were the Teachers Assisstants's of the class?" %>
+            <%= f.label "Who were the Teachers Assistants's of the class?" %>
             <%= f.text_field :TAs, class:"form-control" %>
           </div>
           <div class="form-group">

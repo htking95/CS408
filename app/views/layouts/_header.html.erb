@@ -20,13 +20,13 @@
     background-color: transparent !important;
   }
 
-  #signOut {
+  .signOut {
     color: #B1810B !important;
     text-decoration: none !important;
     background-color: transparent !important;
   }
 
-  #signOut:hover  {
+  .signOut:hover  {
     color: #B1810B !important;
     text-decoration: none !important;
     background-color: transparent !important;
@@ -114,10 +114,10 @@
                 <li><a href="/ContactUs">Contact Us<span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
               </ul>
             </li>
-            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, id: "signOut"; %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "signOut"; %></li>
           <% else %>
-              <li><%= link_to "Sign up", new_user_registration_path %></li>
-              <li><%= link_to "Sign in", new_user_session_path %></li>
+              <li><%= link_to "Sign up", new_user_registration_path, class: "signOut" %></li>
+              <li><%= link_to "Sign in", new_user_session_path, class: "signOut" %></li>
           <% end %>
          </ul>
       </div><!--Collapse -->
