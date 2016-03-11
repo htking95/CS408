@@ -1,31 +1,57 @@
 <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:600' rel='stylesheet' type='text/css'>
 <style>
-.navbar{
-  margin-bottom: 0px;
-  z-index: 10000;
-  background-image: url('/assets/footer_background.jpg');
-  font-family: 'Josefin Sans', sans-serif;
-}
+  .navbar{
+    margin-bottom: 0px;
+    z-index: 10000;
+    /*background-image: url('/assets/footer_background.jpg');*/
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: black !important;
+  }
 
-    body {
+  .dropdown-toggle  {
+    color: #B1810B !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+  }
+
+  .dropdown-toggle:hover  {
+    color: #B1810B !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+  }
+
+  .signOut {
+    color: #B1810B !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+  }
+
+  .signOut:hover  {
+    color: #B1810B !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+  }
+
+  body {
     padding: 50px 0px;
   }
 
+  @media(max-width:767px) {
+    .navbar .navbar-form {
+      width: 185px;
+      padding-left:0;
+      padding-right:0;
+    }
+  }
 
-@media(max-width:767px) {
+  @media(min-width:768px) {
     .navbar .navbar-form {
-        width: 185px;
-        padding-left:0;
-        padding-right:0;
+      width: 250px;
     }
-}
-@media(min-width:768px) {
-    .navbar .navbar-form {
-        width: 250px;
-    }
-}
-.navbar .navbar-form {
-  overflow-y: auto;
+  }
+  
+  .navbar .navbar-form {
+    overflow-y: auto;
     padding-top: 0;
     padding-bottom: 0;
     margin-right: 0;
@@ -33,74 +59,46 @@
     border: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
-}
-
-
+  }
 </style>
 
 <script>
-$(document).ready(function () {
-        $('.dropdown-toggle').dropdown();
-        $('select').select2();
-    });
-
+  $(document).ready(function () {
+    $('.dropdown-toggle').dropdown();
+  });
 </script>
 
 
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar- navbar-fixed-top">
    <div class="container-fluid">
       <div class="navbar-header">
-         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         </button>
+        <!-- Collapse -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="glyphicon glyphicon-chevron-down" style="color:#B1810B"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-          <a class="navbar-brand pull-left" href="/pages/home" style="color: white">RateMyClasses</a>
+        <!-- Search Brand -->
+        <a class="navbar-brand pull-left" href="/pages/home" style="color: white; text-shadow: 1px 1px #B1810B;"><h3 style="padding:0px !important; margin:0px !important;">RateMyClasses</h3></a>
 
-        <!--<%#= form_tag new_user_registration_path, method: :get, class: "navbar-form pull-left", role: "search" do %>
-          <div class="input-group">
-            <%#= text_field_tag :search, params[:search],  placeholder:"Search" , class: "form-control" %>
-            <div class="input-group-btn">
-            <%#= button_tag( :class => "btn btn-default") do %>
-            <span style="margin-right: 2px" class="glyphicon glyphicon-search"></span>
-            <%# end %>
-            </div>            
-          </div> -->
-        <%# end %>   
-        
-        <%#= form_tag search_courses_path, method: :get, class: "navbar-form" do %>
-            <!--<p>
-              <%#= text_field_tag :search, params[:search], class:"form-control", placeholder:"search for a course" %>
-              <%#= submit_tag "Search", name:nil, class: "btn btn-default" %>
-           </p>-->
-        <%# end %>
-        
+        <!-- Search Area -->
         <div class="navbar-form" style="width: 300px">    
-        <%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
-              
-              <%#= select_tag :skills, Courses.all.collect {|p| [p.fullName] }, { style: "width: 100%;" ,multiple: false , id: "course_selector"}%>
+          <%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
+                <!-- Search Field -->
+                <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; border: 5px solid gray; background-color: white; color: black" %>
+                <div class="input-group-btn">
+                <!-- Search Button -->
+                <%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; border: 5px solid gray; height: 40px") do %>
+                  <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
+                <% end %>
+                </div>
+            <% end %>
+          </div> <!-- Search Area -->
+      </div> <!-- Navbar Header -->
 
-              <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; border: 5px solid gray; background-color: white; color: black" %>
-              <div class="input-group-btn">
-              <%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; border: 5px solid gray; height: 40px") do %>
-                <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
-              <% end %>
-              </div>
-        
-          <% end %>
-          </div>
-        
-
-      </div>
-
-
-        
-
-
-
-
+      <!-- Collapse -->
       <div class="navbar-collapse collapse">
          <ul class="nav navbar-nav navbar-right">
           <!-- Only show the Profile menu when logged in -->
@@ -116,17 +114,12 @@ $(document).ready(function () {
                 <li><a href="/ContactUs">Contact Us<span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
               </ul>
             </li>
-            <% if current_user.admin? %>
-              <li><%= link_to "Admins Page", pages_admin_path %></li>
-            <% end %>
-            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "signOut"; %></li>
           <% else %>
-              <li><%= link_to "Sign up", new_user_registration_path %></li>
-              <li><%= link_to "Sign in", new_user_session_path %></li>
+              <li><%= link_to "Sign up", new_user_registration_path, class: "signOut" %></li>
+              <li><%= link_to "Sign in", new_user_session_path, class: "signOut" %></li>
           <% end %>
          </ul>
-
-      </div>
-      <!--/.navbar-collapse -->
-   </div>
-</div>
+      </div><!--Collapse -->
+   </div> <!-- Container Fluid -->
+</div> <!-- Navbar -->

@@ -1,7 +1,23 @@
-<div class="container">
-  <div class="jumbotron" style="border: 1px solid black; margin-top: 5px;background-color:white;">
+<style>
+  #main {
+    box-shadow: 3px 3px 10px;
+    background-color: white;
+    margin-top: 15px;
+  }
+  .jumbotron {
+    background-image: url('/gray3.jpg');
+    background-size: 50%;
+    margin: 10px 0px 15px 0px;
+    box-shadow: 3px 3px 10px black;
+    padding: 10px;
+    color: #B1810B;
+    text-shadow: 3px 3px black;
+  }
+</style>
+<div class="container" id="main">
+  <div class="jumbotron">
       <h1 style="text-align:center;">Contact the Developers</h1> 
-      <p style="text-align:center;">Comments, questions, concerns, and anything you'd like to send us goes here!<br>Expect a response from apptitutordevs@gmail.com</p> 
+      <p style="text-align:center; color: white; text-shadow: 2px 2px black;">Comments, questions, concerns, and anything you'd like to send us goes here!<br>Expect a response from apptitutordevs@gmail.com</p> 
   </div>
 
   <div class="row">
@@ -10,7 +26,11 @@
     <%= form_for @message, url: contact_path do |message_form| %>
       <fieldset>
         <div class="field">
-          <%= message_form.text_field :email, :value => current_user.email, class: "form-control" %>
+          <% if user_signed_in? %>
+            <%= message_form.text_field :email, :value => current_user.email, class: "form-control" %>
+          <% else %>
+            <%= message_form.text_field :email, class: "form-control", placeholder: "Email" %>
+          <% end %>
         </div>
 
         <div class="field">
