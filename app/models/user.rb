@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   ratyrate_rater
   acts_as_voter
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable#, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :reviews, dependent: :destroy
 end
