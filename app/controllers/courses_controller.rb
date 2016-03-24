@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 			intcount = 0
 			pos = 0
 			if (currentparams =~ /\d/)
-				while(pos < currentparams.length)
+				while(pos < currentparams.length && pos < 8)
 					newparams[pos] = currentparams[pos]
 					if (currentparams[pos] =~ /\d/)
 						intcount += 1
