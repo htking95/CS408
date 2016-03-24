@@ -12,6 +12,25 @@
       <% end %>
     <% end %>
   <% end %>
+
+  <% if @answers.blank? %>
+    <h3>No answers to delete.</h3>
+  <% else %>
+    <% @answers.each do |a| %>
+      <% if a.scoreFlag > 2 %>
+        <p><%= a.answer %></p>
+        <p><%= a.created_at %></p>
+        flag: <%= a.scoreFlag %>
+        <%= link_to 'unflag', unflag_answer_path(a), method: :put %>
+        <td><%= link_to 'Destroy', a, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+
+
 <% else %>
   <h3>This page is only for admins.</h3>
 <% end %>

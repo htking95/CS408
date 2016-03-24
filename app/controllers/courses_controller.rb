@@ -34,7 +34,30 @@ class CoursesController < ApplicationController
 
 	def search
 		if params[:search].present?
-			@courses = Course.search(params[:search])
+			# pads search results with zeros if necessary
+			currentparams = params[:search]
+			newparams = ""
+			intcount = 0
+			pos = 0
+			if (currentparams =~ /\d/)
+				while(pos < currentparams.length)
+					newparams[pos] = currentparams[pos]
+					if (currentparams[pos] =~ /\d/)
+						intcount += 1
+					end
+					pos += 1
+				end
+				if (intcount < 4)
+					newparams[pos] = "0"
+					pos += 1
+					newparams[pos] = "0"
+				end
+				@courses = Course.search(newparams, page: params[:page], per_page: 10)
+			else
+				# uses normal search results if no integers
+				#  are present in the search params
+				@courses = Course.search(params[:search], page: params[:page], per_page: 10)
+			end
 		else
 			@courses = nil
 		end
