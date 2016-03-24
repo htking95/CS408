@@ -50,9 +50,10 @@
 
   .reviewRow {
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 5px;
     background-color: #7CA6C0;
     color: black;
+    
   }
   #reviews {
     background-color:;
@@ -182,6 +183,7 @@
     <% else %>
       <% @reviews.each do |review| %>
         <div class="row reviewRow" style="margin-bottom: 10px; background-color: #7CA6C0">
+          <div class="col-xs-12" style="box-shadow: 0px 0px 7px black inset; padding: 10px">
             <div class="col-xs-6" style="border-bottom: 1px solid black">
                 <b>Professor:</b> <%= review.Instructor %>
             </div>
@@ -233,14 +235,10 @@
               <%= review.scoreFlag %> <%= link_to 'flag', flag_review_path(review), method: :put, class: "vote" %>
             </div>
             
-            <!--Rating of the review (Combined upvotes and downvotes): <%#= review.scoreReview %>
-            <br>
-            How many people thought the review was funny: <%#= review.scoreFunny %>
-            <br>
-            How many people have flagged the review: <%#= review.scoreFlag %>-->
             <div class="col-xs-6" align="right">
               Review created on: <%= review.created_at.strftime("%B %d, %Y") %>
             </div>
+          </div>
         </div>
       <% end %>
     <% end %>
