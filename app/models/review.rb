@@ -3,6 +3,7 @@ class Review < ActiveRecord::Base
 	belongs_to :course
 	acts_as_votable
   mount_uploader :syllabus, SyllabusUploader
+  validates :Comment, presence: true
 
 	def scoreReview
     	self.get_upvotes.size - self.get_downvotes.size
