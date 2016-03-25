@@ -230,7 +230,7 @@
               <%= review.scoreFunny %>
             </div>
             <div class="col-xs-6">
-              <%= review.scoreFlag %> <%= link_to 'flag', flag_review_path(review), method: :put, class: "vote" %>
+              <%= review.scoreFlag %> <%= link_to 'flag', flag_review_path(review), :data => {:confirm => 'Are you sure?'}, method: :put, class: "vote" %>
             </div>
             
             <!--Rating of the review (Combined upvotes and downvotes): <%#= review.scoreReview %>
@@ -292,7 +292,7 @@
                           <%= a.answer %><br>
                           <%= link_to 'upvote', like_answer_path(a), method: :put, class: "vote2" %>
                           <%= link_to 'downvote', dislike_answer_path(a), method: :put, class: "vote2" %>(<%= a.scoreAnswer %>)
-                          <%= link_to 'flag', flag_answer_path(a), method: :put, class: "vote2" %>(<%= a.scoreFlag %>)
+                          <%= link_to 'flag', flag_answer_path(a), :data => {:confirm => 'Are you sure?'}, method: :put, class: "vote2" %>(<%= a.scoreFlag %>)
                         </p> 
                       </h5>
                     </div>
