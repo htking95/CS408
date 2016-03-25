@@ -220,6 +220,11 @@
             <div class="col-xs-12">
               <b>Taken during:</b> <%= review.Semester %> <%= review.YearTaken %>
             </div>
+            <div>
+              <% if review.user_id == current_user.id %>
+                <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+              <% end %>
+            </div>
             <div class="col-xs-6">
               <%= review.scoreReview %>
               <%= link_to 'upvote', like_review_path(review), method: :put, class: "vote" %>
