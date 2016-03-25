@@ -10,7 +10,7 @@ class Review < ActiveRecord::Base
   	end
 
   	def scoreFunny
-  		self.find_votes_for(:vote_scope => 'funny').size
+  		self.get_upvotes.size - self.get_downvotes.size
   	end
 
   	def scoreFlag
