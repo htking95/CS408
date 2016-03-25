@@ -21,3 +21,15 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    models: 
+      review: "Review"
+    attributes:
+      review:
+        Comment: "Review"
+    errors:
+      models:
+        review:
+          attributes:
+            comment:
+              blank: "cannot be empty"
