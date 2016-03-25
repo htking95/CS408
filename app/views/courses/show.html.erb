@@ -112,8 +112,6 @@
     </h2>
   </div>
 
-   
-  <% if user_signed_in? %>
     <div id="courseDescription">
       <h4 style="margin-bottom: 0px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
       <div style="padding: 10px; margin-left: 5px;">
@@ -129,24 +127,6 @@
         <% end %>
       </div>
     </div>
-  <% else %>
-
-  <!-- Description -->
-  <div id="courseDescription">
-    <h4 style="margin-bottom: 0px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
-    <% if (@course.description.blank?) then %>
-      <span style="padding-left: 10px">
-        No description of this class has been written yet. Login to write one!
-      </span>
-    <% else %>
-      <span style="padding-left: 10px">
-        <%= @course.description %>
-      </span>
-      <br>
-      <span style="text-size:x-small"><strong>*If this description is not accurate, please login and write a new one!</strong></span>
-    <% end %>
-  </div>
-  <% end %>
   
   <div class="row">
     <!-- Updates the database when needed -->
@@ -267,8 +247,10 @@
               <% end %>
             </div>
             <div>
-              <% if review.user_id == current_user.id %>
-                <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+              <% if user_signed_in? %>
+                <% if review.user_id == current_user.id %>
+                  <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+                <% end %>
               <% end %>
             </div>
             <div class="col-xs-6">
@@ -298,18 +280,18 @@
     </div>
 
     <!-- If the user is signed in, show question field -->
-    <% if user_signed_in? %>
+    <%# if user_signed_in? %>
       <%= form_for @course.questions.new, :html => {:style => 'margin-bottom: 10px'} do |f| %>
         <div class="field">
           <%= f.text_field :question, class: 'form-control', placeholder: "Ask a Question about the Class", :maxlength => "240", rows: 1 %>
           <%= f.hidden_field :course_id, "value" => @course.id %>
-          <%= f.hidden_field :userID, "value" => current_user.id %>
+          <%#= f.hidden_field :userID, "value" => current_user.id %>
         </div>
         <div align="center">
           <%= f.submit "Ask Question", class: "btn btn-primary", style:"width:200px"%> 
         </div>
       <% end %>
-    <% end %>
+    <%# end %>
 
     <% @course.questions.each do |q| %>
       <% if !q.question.nil? %>

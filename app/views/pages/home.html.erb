@@ -223,9 +223,10 @@
 					<div class="container-fluid">
 
 						<%= @i = 1 %>
-						<% @courses.sort_by{|x| x[:ratings] }.reverse.first(10).each do |course| %>
+						<% # @courses.sort_by{|x| x[:ratings] }.reverse.first(10).each do |course| %>
+						<% @courses.sort_by{|x| x[:ratings] }.first(5).each do |course| %>
 							<div class="row resultRow">
-								<a href="/courses/<%=course.id%>" class="courseLink">
+								<a href="" class="courseLink">
 								<div class="col-xs-12 result">
 									<div align="left" style="font-size:normal"><b>#<%= @i %></b></div>
 								    <div><h3 style="margin-top: 5px"><b><%= course.fullName %> : <%= course.name %></b></h3></div>
