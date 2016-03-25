@@ -1,9 +1,10 @@
 <% if current_user.admin? %>
+  <% @blank = 0 %>
   <% if @reviews.blank? %>
-    <h3>No reviews to delete.</h3>
   <% else %>
     <% @reviews.each do |review| %>
       <% if review.scoreFlag > 2 %>
+        <% @blank = 1 %>
         <p><%= review.Comment %></p>
         <p><%= review.created_at %></p>
         flag: <%= review.scoreFlag %>
@@ -14,10 +15,10 @@
   <% end %>
 
   <% if @answers.blank? %>
-    <h3>No answers to delete.</h3>
   <% else %>
     <% @answers.each do |a| %>
       <% if a.scoreFlag > 2 %>
+        <% @blank = 1 %>
         <p><%= a.answer %></p>
         <p><%= a.created_at %></p>
         flag: <%= a.scoreFlag %>
@@ -27,9 +28,9 @@
     <% end %>
   <% end %>
 
-
-
-
+  <% if @blank = 0 %>
+    <h3>There are no reviews or questions that have been flagged 3 times.</h3>
+  <% end %>
 
 <% else %>
   <h3>This page is only for admins.</h3>
