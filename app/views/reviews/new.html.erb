@@ -1,13 +1,39 @@
-<h1> 
-	New Review for <%= @cid.name %> (<%= @cid.fullName%>)
-</h1>
+<style>
+	#myBody {
+		background-color: white;
+		box-shadow: 3px 3px 10px black;
+		margin-top: 15px;
+	}
+	.backLink {
+		background-color: transparent;
+		text-decoration: none;
+		text-shadow: 2px 2px black;
+	}
+	.backLink:hover {
+		background-color: transparent;
+		text-decoration: none;
+		text-shadow: 2px 2px black;
+	}
+</style>
 
-<% if Review.find_by_course_id_and_user_id(@cid.id, current_user.id) then %>
-	<h4>
-		You already wrote a review for this class
-	</h4>
-<% else %>
-	<%= render 'form' %>
-<% end %>
- 
-<%= link_to 'Back', course_path(@cid) %>
+<div class="container" id="myBody">
+	<div style="background-color: #B1810B; padding: 10px; margin-top: 10px">
+		<h1 style="color: white; text-shadow: 2px 2px black"> 
+			Review for <%= @cid.fullName%>: <%= @cid.name %>
+		</h1>
+	</div>
+
+	<% if Review.find_by_course_id_and_user_id(@cid.id, current_user.id) %>
+		<h3 align="center">
+			You already wrote a review for this class
+		</h3>
+		<div style="background-color: #B1810B; padding: 10px; margin-bottom: 10px; text-shadow: 1px 1px black">
+		<%= link_to 'Back', course_path(@cid), style: "color: white", class: "backLink" %>
+		</div>
+	<% else %>
+		<%= render 'form' %>
+	<% end %>
+	
+	
+	
+</div>

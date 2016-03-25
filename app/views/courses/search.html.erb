@@ -1,16 +1,18 @@
 <style>
 	.result {
-		background-color: gold;
-		box-shadow: 2px 2px 20px white;
+		background-color: #B1810B;
+		box-shadow: 2px 2px 20px black;
 		border-radius: 5px;
 	}
+
 	.result:hover{
-		box-shadow: 6px 6px 15px white;
+		box-shadow: 6px 6px 15px black;
 	}
+
 	.resultRow {
-		background-color: black;
 		margin: 5px 0px 5px 0px;
 	}
+
 	.description {
 		border: 1px solid black;
 		min-height: 100px;
@@ -18,35 +20,45 @@
 		overflow: auto;
 		margin: 5px 5px 0px 5px;
 		padding: 5px;
-		background-color: gold;
+		background-color: #B1810B;
 	}
+
 	.descriptionBox {
 		border: 1px solid black;
 		margin-bottom: 10px;
 		background-color: white;
 	}
+
 	#pageContainer {
-		background-color: black;
+		background-color: white;
+		box-shadow: 3px 3px 10px black;
+		margin-top: 15px;
+		padding-top: 15px;
 	}
+
 	.lastEdited {
 		padding-right: 10px;
 	}
+
 	.courseLink {
 		color: black;
 	}
+
 	.courseLink:hover {
 		color: black;
 	}
+
 	.courseLink:visited{
 		color:black;
 	}
+
 	.jumbotron {
-		background-color: gold;
+		background-color: #B1810B;
 		margin-top: 10px;
 		min-height: 400px;
 	}
 </style>
-<div class="container-fluid" id="pageContainer">
+<div class="container" id="pageContainer">
 	<% if @courses == nil || @courses.empty? %>
 		<div class="jumbotron">
 			<h1>We're sorry but we couldn't find any results for you :(</h1>
@@ -102,5 +114,6 @@
 			</div>
 			<br>
 		<% end %>
+		<%= will_paginate @courses, renderer: BootstrapPagination::Rails %>
 	<% end %>
 </div>
