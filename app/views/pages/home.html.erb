@@ -151,7 +151,7 @@
 					<div class="col-xs-12 col-sm-7 col-md-6">
 				      	<%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
 				      		<p>
-				      			<%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; width: 85%; margin-top: 8px; border: 5px solid gray; background-color: white; color: black;" %>
+				      			<%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue", style:"border-radius: 20px; height: 40px; width: 85%; margin-top: 8px; border: 5px solid gray; background-color: white; color: black;" %>
 				      			<%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; margin-top: 8px; border: 5px solid gray; height: 40px;") do %>
 				      				<span class="glyphicon glyphicon-search" aria-hidden="true" style="padding-top: -5px"></span>
 				      			<% end %>
@@ -246,7 +246,7 @@
 								    			<% if course.lastEdited.blank? %>
 								    				Last edited: n/a
 								    			<% else %>
-								    				Last edited: <%= course.updated_at %>
+								    				Last edited: <%= course.lastEdited.strftime("%B %e, %Y") %>
 								    			<% end %>
 								    		</div>
 								    	</div>
