@@ -31,7 +31,7 @@
           </div>
           <div class="form-group">
             <%= f.label "What grade did you recieve in the class?" %>
-            <%= f.select(:GradeReceived, [['A', 1], ['B', 2], ['C',3], ['D',4], ['F',5]])  %>
+            <%= f.select(:GradeReceived, [['A', 1], ['B', 2], ['C',3], ['D',4], ['F',5]], :prompt => "Grade")  %>
           </div>
           <div class="field">
             <%= f.label "How many hours a week did you spend on the class?" %><br>
@@ -47,8 +47,8 @@
           </div>
           <dib class="field">
           <%= f.label "When did you take the class?" %><br>
-          <%= f.select(:Semester, [['Fall', 'Fall'], ['Spring', 'Spring'], ['Summer','Summer']]) %>
-          <%= f.select :YearTaken, (Time.zone.now.year - 100)..(Time.zone.now.year + 1) %>
+          <%= f.select(:Semester, [['Fall', 'Fall'], ['Spring', 'Spring'], ['Summer','Summer']], :prompt => "Semester") %>
+          <%= f.select( :YearTaken, ((Time.zone.now.year - 100)..(Time.zone.now.year + 1)).to_a.reverse, :prompt => "Year" )%>
           </div>
           <div class="form-group" style="padding-left: 30px; padding-right:30px">
             <%= f.label :syllabus %>

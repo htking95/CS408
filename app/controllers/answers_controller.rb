@@ -24,14 +24,14 @@ class AnswersController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @answer = Answer.new(question_params)
+    @answer = Answer.new(answer_params)
 
     respond_to do |format|
       if @answer.save
         format.html { redirect_to :back, notice: 'Answer was successfully created.' }
         format.json { render :show, status: :created, location: @answer }
       else
-        format.html { render :new }
+        format.html { redirect_to :back, alert: 'Answer cannot be empty.' }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
@@ -106,7 +106,7 @@ class AnswersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def question_params
+    def answer_params
       params.require(:answer).permit(:answer, :userID, :question_id)
     end
 end
