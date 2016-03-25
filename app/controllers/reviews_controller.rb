@@ -50,6 +50,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
+      #format.html { redirect_to pages_admin_path, notice: 'Review was successfully destroyed.' }
       format.html { redirect_to pages_review_path, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -57,21 +58,21 @@ class ReviewsController < ApplicationController
 
   def upvote
      @review = Review.find(params[:id])
-     if current_user.voted_up_on? @review then
-        @review.unvote_by current_user
-     else
-        @review.upvote_by current_user
-     end
+     #if current_user.voted_up_on? @review then
+     #   @review.unvote_by current_user
+     #else
+        @review.vote_by :voter => current_user, :vote_weight => 1, :duplicate => true
+     #end
      redirect_to :back
   end
 
   def downvote
      @review = Review.find(params[:id])
-     if current_user.voted_down_on? @review then
-        @review.unvote_by current_user
-     else
-        @review.downvote_by current_user
-     end
+     #if current_user.voted_down_on? @review then
+     #   @review.unvote_by current_user
+     #else
+        @review.vote_by :voter => current_user, :vote => 'bad', :vote_weight => 1, :duplicate => true
+     #end
      redirect_to :back
   end
 
@@ -87,11 +88,11 @@ class ReviewsController < ApplicationController
 
   def flag
      @review = Review.find(params[:id])
-     if current_user.voted_on? @review, vote_scope: 'flag' then
-        @review.unvote_by current_user, vote_scope: 'flag', :duplicate => true
-     else
-        @review.upvote_by current_user, vote_scope: 'flag', :duplicate => true
-     end
+     #if current_user.voted_on? @review, vote_scope: 'flag' then
+     #   @review.unvote_by current_user, vote_scope: 'flag', :duplicate => true
+     #else
+        @review.vote_by :voter => current_user, vote_scope: 'flag', :vote_weight => 1, :duplicate => true
+     #end
      redirect_to :back
   end
 
