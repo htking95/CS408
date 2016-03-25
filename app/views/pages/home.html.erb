@@ -224,7 +224,7 @@
 
 						<%= @i = 1 %>
 						<% # @courses.sort_by{|x| x[:ratings] }.reverse.first(10).each do |course| %>
-						<% @courses.sort_by{|x| x[:ratings] }.first(5).each do |course| %>
+						<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).reverse.each do |course| %>
 							<div class="row resultRow">
 								<a href="" class="courseLink">
 								<div class="col-xs-12 result">
