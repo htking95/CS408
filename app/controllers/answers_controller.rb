@@ -94,7 +94,8 @@ class AnswersController < ApplicationController
   def unflag
      @answer = Answer.find(params[:id])
      if current_user.admin? then
-        @answer.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
+        #@answer.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
+        @answer.downvote_by current_user, vote_scope: 'flag', :duplicate => true
      end
      redirect_to :back
   end

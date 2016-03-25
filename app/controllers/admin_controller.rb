@@ -10,7 +10,8 @@ class AdminController < ApplicationController
    def unflag
      @review = Review.find(params[:id])
      if current_user.admin? then
-        @review.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
+        #@review.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
+        review.downvote_by current_user, vote_scope: 'flag', :duplicate => true
      end
      redirect_to :back
   end

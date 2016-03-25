@@ -267,8 +267,10 @@
               <% end %>
             </div>
             <div>
-              <% if review.user_id == current_user.id %>
-                <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+              <% if user_signed_in? %>
+                <% if review.user_id == current_user.id %>
+                  <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+                <% end %>
               <% end %>
             </div>
             <div class="col-xs-6">
