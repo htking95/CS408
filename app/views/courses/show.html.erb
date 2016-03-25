@@ -266,9 +266,7 @@
               <%= review.scoreFlag %> <%= link_to 'flag', flag_review_path(review), :data => {:confirm => 'Are you sure?'}, method: :put, class: "vote" %>
             </div>
             
-            <div class="col-xs-6" align="right">
-              Review created on: <%= review.created_at.strftime("%B %d, %Y") %>
-            </div>
+
           </div>
         </div>
       <% end %>
