@@ -50,7 +50,8 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to pages_admin_path, notice: 'Review was successfully destroyed.' }
+      #format.html { redirect_to pages_admin_path, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to pages_review_path, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -98,7 +99,8 @@ class ReviewsController < ApplicationController
   def unflag
      @review = Review.find(params[:id])
      if current_user.admin? then
-        @review.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
+        #@review.downvote_by current_user, vote_scope: 'flag', :vote_weight => 3, :duplicate => true
+        @review.downvote_by current_user, vote_scope: 'flag', :duplicate => true
      end
      redirect_to :back
   end

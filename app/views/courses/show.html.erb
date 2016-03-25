@@ -248,8 +248,14 @@
             </div>
             <div>
               <% if user_signed_in? %>
+<<<<<<< HEAD
+                <% if review.user_id == current_user.id %>
+                  <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+                <% end %>
+=======
               <% if review.user_id == current_user.id %>
                 <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+>>>>>>> master
               <% end %>
               <% end %>
             </div>
