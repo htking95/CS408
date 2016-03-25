@@ -267,8 +267,10 @@
               <% end %>
             </div>
             <div>
-              <% if review.user_id == current_user.id %>
-                <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+              <% if user_signed_in? %>
+                <% if review.user_id == current_user.id %>
+                  <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
+                <% end %>
               <% end %>
             </div>
             <div class="col-xs-6">
@@ -300,18 +302,18 @@
     </div>
 
     <!-- If the user is signed in, show question field -->
-    <% if user_signed_in? %>
+    <%# if user_signed_in? %>
       <%= form_for @course.questions.new, :html => {:style => 'margin-bottom: 10px'} do |f| %>
         <div class="field">
           <%= f.text_field :question, class: 'form-control', placeholder: "Ask a Question about the Class", :maxlength => "240", rows: 1 %>
           <%= f.hidden_field :course_id, "value" => @course.id %>
-          <%= f.hidden_field :userID, "value" => current_user.id %>
+          <%#= f.hidden_field :userID, "value" => current_user.id %>
         </div>
         <div align="center">
           <%= f.submit "Ask Question", class: "btn btn-primary", style:"width:200px"%> 
         </div>
       <% end %>
-    <% end %>
+    <%# end %>
 
     <% @course.questions.each do |q| %>
       <% if !q.question.nil? %>
