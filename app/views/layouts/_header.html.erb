@@ -87,7 +87,7 @@
         <div class="navbar-form" style="width: 300px">    
           <%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
                 <!-- Search Field -->
-                <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue University", style:"border-radius: 20px; height: 40px; border: 5px solid gray; background-color: white; color: black" %>
+                <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course", style:"border-radius: 20px; height: 40px; border: 5px solid gray; background-color: white; color: black" %>
                 <div class="input-group-btn">
                 <!-- Search Button -->
                 <%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; border: 5px solid gray; height: 40px") do %>

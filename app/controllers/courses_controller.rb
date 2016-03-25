@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 			intcount = 0
 			pos = 0
 			if (currentparams =~ /\d/)
-				while(pos < currentparams.length)
+				while(pos < currentparams.length && pos < 8)
 					newparams[pos] = currentparams[pos]
 					if (currentparams[pos] =~ /\d/)
 						intcount += 1
@@ -61,6 +61,14 @@ class CoursesController < ApplicationController
 		else
 			@courses = nil
 		end
+	end
+
+	def update_lastedited
+		@course = Course.find(params[:id])
+		date = Time.now
+		date.strftime("%B %e, %Y")
+		@course.update_column(:lastEdited, date)
+    	redirect_to :back
 	end
 end
 
