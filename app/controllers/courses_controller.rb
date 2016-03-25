@@ -62,5 +62,13 @@ class CoursesController < ApplicationController
 			@courses = nil
 		end
 	end
+
+	def update_lastedited
+		@course = Course.find(params[:id])
+		date = Time.now
+		date.strftime("%B %e, %Y")
+		@course.update_column(:lastEdited, date)
+    	redirect_to :back
+	end
 end
 

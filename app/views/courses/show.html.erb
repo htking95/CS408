@@ -120,6 +120,14 @@
         <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea%>
       </div>
       <div style="font-size:x-small" align="center"><strong>*If this description is not accurate, please edit by clicking on it or write a new one.</strong></div>
+      
+      <!-- Update the database with lastEdited -->
+      <div align="center">
+        <%= form_tag update_lastedited_course_path(@course, @course.id), method: :put do %>
+          <%= hidden_field_tag :lastEdited, @course.lastEdited -%>
+          <%= submit_tag 'Update Description' -%>
+        <% end %>
+      </div>
     </div>
   <% else %>
 

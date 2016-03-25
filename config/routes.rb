@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :reviews, except: [:show, :index]
     collection do
       get 'search'
+      put :update_lastedited
+    end
+    member do
+      put :update_lastedited
     end
   end
   
