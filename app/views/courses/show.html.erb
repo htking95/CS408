@@ -2,17 +2,20 @@
   #main {
     background-color: white;
     box-shadow: 3px 3px 10px black;
-    margin-top: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .jumbotron {
-    margin-top: 10px;
     background-color: black;
     background-image: url("/gray3.jpg");
     background-size: 50%;
     padding-bottom: 10px;
-    margin-bottom: 10px;
     border-radius: 0px !important;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+
   }
 
   #courseName {
@@ -28,6 +31,8 @@
   #courseDescription {
     background-color: #B1810B;
     padding: 2px 10px 5px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   #averageGrade {
@@ -45,7 +50,7 @@
   #questions {
     background-color: #BAA892;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   .reviewRow {
@@ -129,7 +134,7 @@
 <div class="container" id="main">
   <!-- Course Header -->
   <div class="jumbotron">
-    <h1 style="padding-top:20px" id="courseName">
+    <h1 id="courseName">
       <%= @course.fullName %>: <%= @course.name %>
     </h1>
 
@@ -141,8 +146,8 @@
    
   <% if user_signed_in? %> <!-- Description -->
     <div  class="container-fluid" id="courseDescription">
-      <h4 style="margin-bottom: 7px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
-      <div style="padding: 10px; margin-left: 5px; font-size: 1.2em; border: 1px solid; border-radius: 5px;">
+      <h4 style="margin-bottom: 7px; color:white; text-shadow: 1px 1px black"><b> Course Description:</b></h4>
+      <div style="padding: 10px; margin-left: 10px; margin-right: 10px; font-size: 1.2em; border: 1px solid; border-radius: 5px;">
         <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea,:ok_button => 'Submit',:confirm=>true, :ok_button_class => 'desc_ok_but btn btn-default', :class => "descSpan"%>
       </div>
       <div style="font-size:x-small" align="center"><strong>*If this description is not accurate, please edit by clicking on it or write a new one.</strong></div>
@@ -202,14 +207,9 @@
     </div> <!-- Average Grage -->
   </div> <!-- Ratings and Average Grade Row -->
 
-  <!-- Write Review Button -->
-  <div align="center" style="margin-top: 10px">
-    <%= link_to "Write a Review", new_course_review_path(:course_id => @course.id), class: "btn btn-success", id: "reviewButton" %>
-  </div>
-
   <!-- Reviews -->
   <div class="container-fluid" id="">
-    <h3>Reviews</h3>
+    <h2>Reviews</h2>
     <% if @reviews.blank? %>
       <h3 align="center">Hmm. No one has written a review yet. You could be the first!</h3>
     <% else %>
@@ -498,28 +498,19 @@
         <% end %> <!-- End for each review -->
       <% end %>
     <% end %> <!-- End if reviews blank -->
+      <!-- Write Review Button -->
+    <div style="margin-top: 10px">
+      <%= link_to "Write a new review", new_course_review_path(:course_id => @course.id), class: "btn btn-default", id: "reviewButton" %>
+    </div>
   </div> <!-- End Reviews -->
 
   <!-- Questions -->
-  <div id="questions">
-    <div id="questionsTitle">
-      <h2>Questions</h2>
+  <div class="container-fluid" id="questions">
+    <div class="row" id="">
+      <div class="col-lg-12">
+        <h2>Questions</h2>
+      </div>
     </div>
-
-    <!-- If the user is signed in, show question field -->
-    <% if user_signed_in? %>
-      <%= form_for @course.questions.new, :html => {:style => 'margin-bottom: 10px'} do |f| %>
-        <div class="field">
-          <%= f.text_field :question, class: 'form-control', placeholder: "Ask a Question about the Class", :maxlength => "240", rows: 1 %>
-          <%= f.hidden_field :course_id, "value" => @course.id %>
-          <%= f.hidden_field :userID, "value" => current_user.id %>
-        </div>
-        <div align="center">
-          <%= f.submit "Ask Question", class: "btn btn-primary", style:"width:200px"%> 
-        </div>
-      <% end %>
-    <% end %>
-
     <% @course.questions.each do |q| %>
       <% if !q.question.nil? %>
         <div style=" background-color: #B1810B; margin-top: 10px;">
@@ -559,7 +550,7 @@
                   <div class="answerBar">
                     <%= f.text_field :answer,  class: 'form-control', placeholder: "Answer this question", :maxlength => "10000", rows: 4, style: "" %>
                   </div>
-                  <div align="center" style="margin-top: 10px">
+                  <div style="margin-top: 10px; margin-left: 10px">
                     <%= f.submit "Answer Question", class: "btn btn-confirm", style: "width: 200px" %>
                   </div>
                   <%= f.hidden_field :question_id, "value" => q.id %>
@@ -571,5 +562,21 @@
         </div>
       </div>
     <% end %> <!-- Each Question -->
+    <!-- If the user is signed in, show question field -->
+    <% if user_signed_in? %>
+      <h3> <b>Have a new question? Ask below.</b> </h3>
+      <%= form_for @course.questions.new, :html => {:style => 'margin-bottom: 10px; padding-left: 10px; padding-right: 10px;'} do |f| %>
+        <div class="field">
+          <%= f.text_field :question, class: 'form-control', placeholder: "Ask a Question about the Class", :maxlength => "240", rows: 1 %>
+          <%= f.hidden_field :course_id, "value" => @course.id %>
+          <%= f.hidden_field :userID, "value" => current_user.id %>
+        </div>
+        <div align="">
+          <%= f.submit "Ask Question", class: "btn btn-primary", style:"width:200px"%> 
+        </div>
+      <% end %>
+    <% else %>
+      <h3> <b>Have a new question? Sign in to ask.</b> </h3>
+    <% end %>
   </div> <!-- Questions -->
 </div> <!-- Main -->
