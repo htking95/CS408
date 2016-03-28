@@ -104,19 +104,28 @@
   .ion-android-happy{
     font-size: 1.5em;
   }
+  .descSpan{
+    width: 100%;
+    display: block;
+  }
+  .desc_ok_but{
+    display: block;
+  }
+
   </style>
 
 <head>
-<script>
-    var aboutMe = "";
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover(); 
-        $(".best_in_place").best_in_place();
-    });
-</script>
+  <script>
+      var aboutMe = "";
+      $(document).ready(function(){
+          $('[data-toggle="popover"]').popover(); 
+          $(".best_in_place").best_in_place();
+      });
+  </script>
 
-<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
 </head>
+
 <div class="container" id="main">
   <!-- Course Header -->
   <div class="jumbotron">
@@ -130,11 +139,11 @@
   </div>
 
    
-  <% if user_signed_in? %>
-    <div id="courseDescription">
-      <h4 style="margin-bottom: 0px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
-      <div style="padding: 10px; margin-left: 5px;">
-        <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea%>
+  <% if user_signed_in? %> <!-- Description -->
+    <div  class="container-fluid" id="courseDescription">
+      <h4 style="margin-bottom: 7px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
+      <div style="padding: 10px; margin-left: 5px; font-size: 1.2em; border: 1px solid; border-radius: 5px;">
+        <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea,:ok_button => 'Submit',:confirm=>true, :ok_button_class => 'desc_ok_but btn btn-default', :class => "descSpan"%>
       </div>
       <div style="font-size:x-small" align="center"><strong>*If this description is not accurate, please edit by clicking on it or write a new one.</strong></div>
       
@@ -147,22 +156,20 @@
       </div>
     </div>
   <% else %>
-
-  <!-- Description -->
-  <div id="courseDescription">
-    <h4 style="margin-bottom: 0px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
-    <% if (@course.description.blank?) then %>
-      <span style="padding-left: 10px">
-        No description of this class has been written yet. Login to write one!
-      </span>
-    <% else %>
-      <span style="padding-left: 10px">
-        <%= @course.description %>
-      </span>
-      <br>
-      <span style="text-size:x-small"><strong>*If this description is not accurate, please login and write a new one!</strong></span>
-    <% end %>
-  </div>
+    <div id="courseDescription">
+      <h4 style="margin-bottom: 0px; color:white; text-shadow: 1px 1px black"><b>Description:</b></h4>
+      <% if (@course.description.blank?) then %>
+        <span style="padding-left: 10px">
+          No description of this class has been written yet. Login to write one!
+        </span>
+      <% else %>
+        <span style="padding-left: 10px">
+          <%= @course.description %>
+        </span>
+        <br>
+        <span style="text-size:x-small"><strong>*If this description is not accurate, please login and write a new one!</strong></span>
+      <% end %>
+    </div>
   <% end %>
   
   <div class="row">
@@ -210,7 +217,7 @@
         <% @reviews.each do |review| %>
           <div class="container-fluid" style="border: 2px solid #000000; border-radius: 7px; margin-top: 5px;">
               <div class="row" style="border-bottom: 1px solid #000000">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-xs-6">
                   <h4><b>Professor:</b>
                   <% if !review.Instructor.blank? %>
                     <%= review.Instructor %>
@@ -220,7 +227,7 @@
                   </h4>
                 </div>
 
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-xs-6">
                   <h4>
                   <b>
                     <% if !review.Semester.blank? %>
@@ -232,7 +239,7 @@
                   </h4>
                 </div>
 
-                <div class="col-lg-5">
+                <div class="col-lg-5 col-xs-6">
                   <h4>
                     <b>Teacher's Assistants:</b>
                     <% if !review.TAs.blank? %>
@@ -243,7 +250,7 @@
                   </h4>
                 </div>
 
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-xs-6">
                   <% if (review.user_id == current_user.id) %>
                     <h4>
                       <%= link_to edit_course_review_path(:course_id => @course.id, :id => review.id) do%>
@@ -265,12 +272,12 @@
               </div>
 
               <div class="row" style="margin-top: 5px">
-                <div class="col-lg-7" >
+                <div class="col-lg-7 col-xs-12" >
                   <div class="well well-sm">
                     <%= review.Comment %>
                   </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-5 col-xs-12">
                   <b>Hours/week:</b>
                   <% if !review.HoursAWeek.blank? %>
                     <%= review.HoursAWeek %>
@@ -302,7 +309,7 @@
               </div>
 
               <div class="row" style="margin-top: 0px;">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-xs-6">
                   <% if !(current_user.voted_as_when_voted_for review).nil? %> <!-- If has been voted for -->
                     <% if current_user.voted_as_when_voted_for review %> <!-- If vote was a like -->
                       <span style="font-size:1.35em;">(<%= review.scoreReview %>)</span>
@@ -334,7 +341,7 @@
                       <% end %>
                   <% end %>
                 </div>
-                <div class="col-lg-8" style="text-align:right">
+                <div class="col-lg-8 col-xs-6" style="text-align:right">
                   <% if current_user.voted_as_when_voted_for review, :vote_scope => 'flag' %>
                     <%= link_to flag_review_path(review), method: :put, class: "vote" do %>
                       <span class="glyphicon glyphicon-flag" style="color:red"></span> Flag review
@@ -350,7 +357,7 @@
               </div>
 
               <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7 col-xs-5">
                   <% if current_user.voted_as_when_voted_for review, :vote_scope => 'funny' %>
                     <i class="icon ion-happy" style="font-size:1.5em; color:blue;"></i>
                   <% end %>
@@ -361,8 +368,8 @@
                   <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>
                   
                 </div>
-                <div class="col-lg-5">
-                  <p style="text-align:right">Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
+                <div class="col-lg-5 col-xs-7">
+                  <p style="text-align:right;">Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
                 </div>
               </div>
           </div>
