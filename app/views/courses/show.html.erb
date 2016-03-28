@@ -41,6 +41,7 @@
 
   #starRatings {
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   #reviewButton {
@@ -116,7 +117,11 @@
   .desc_ok_but{
     display: block;
   }
-
+  .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+  }
   </style>
 
 <head>
@@ -145,20 +150,61 @@
 
    
   <% if user_signed_in? %> <!-- Description -->
-    <div  class="container-fluid" id="courseDescription">
+    <div  class="container" id="courseDescription">
       <h4 style="margin-bottom: 7px; color:white; text-shadow: 1px 1px black"><b> Course Description:</b></h4>
       <div style="padding: 10px; margin-left: 10px; margin-right: 10px; font-size: 1.2em; border: 1px solid; border-radius: 5px;">
         <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea,:ok_button => 'Submit',:confirm=>true, :ok_button_class => 'desc_ok_but btn btn-default', :class => "descSpan"%>
       </div>
-      <div style="font-size:x-small" align="center"><strong>*If this description is not accurate, please edit by clicking on it or write a new one.</strong></div>
+      <div style="font-size:x-small; margin-left:20px;"><strong>*If this description is not accurate, please edit by clicking on it or write a new one.</strong></div>
       
       <!-- Update the database with lastEdited -->
-      <div align="center">
+      <div style="margin-left:20px;">
         <%= form_tag update_lastedited_course_path(@course, @course.id), method: :put do %>
           <%= hidden_field_tag :lastEdited, @course.lastEdited -%>
           <%= submit_tag 'Update Description' -%>
         <% end %>
       </div>
+        <div class="row" style="background-color:white; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+          <!-- Updates the database when needed -->
+          <% @course.update_column(:ratings, @course.average_rate) %>
+
+          <!-- Star Ratings -->
+          <div class="col-sm-8 col-lg-6" id="starRatings">
+            <!-- Difficulty -->
+            <div style="width:150px; display: block; float:left;">
+              <div class="pull-left vcenter" style="font-size:23px; height:32px;"><a data-toggle="popover" data-trigger="hover" title="Difficulty" data-content="How hard was the class? 1 being the easiest, 5 being the hardest."><strong class="">Difficulty </strong><span class="glyphicon glyphicon-info-sign vcenter"></span></a></div>
+              <div class="pull-left vcenter" style="font-size:23px; height:32px; "><a data-toggle="popover" data-trigger="hover" title="Workload" data-content="How much work did this class take? 1 being the least, 5 being the most."><strong class="">Workload </strong><span class="glyphicon glyphicon-info-sign vcenter"></span></a></div>
+              <div class="pull-left vcenter" style="font-size:23px; height:32px;"><a data-toggle="popover" data-trigger="hover" title="Enjoyment" data-content="How much did you like the class? 1 being the least, 5 being the most."><strong class="">Enjoyment </strong><span class="glyphicon glyphicon-info-sign vcenter"></span></a></div>
+            </div>
+
+            <div style="display:block">
+            <%= rating_for @course, "difficulty", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg", star_on: "firestarfull.png", star_off: "firestarempty.png", star_half: "firestarhalf.png" %>
+
+            <!-- Workload -->
+            
+            <%= rating_for @course, "workload", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg", star_on: "pencilstarfull.png", star_off: "pencilstarempty.png", star_half: "pencilstarhalf.png" %>
+            <!-- Enjoyment -->
+            
+            <%= rating_for @course, "enjoyment", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg", star_on: "smilestarfull.png", star_off: "smilestarempty.png", star_half: "smilestarhalf.png"  %>
+            </div>
+          </div> <!-- Star Ratings-->
+
+          <!-- Average Grage -->
+          <div class="col-sm-4 col-lg-6" align="center" id="averageGrade">
+            <div style="border-bottom: solid 2px black;">
+              <h2 style="display:inline;"><b>Average Grade</b></h2>
+            </div>
+
+            <div class="well well-sm;" style="margin-top:5px;">
+              <% if @course.averageGrade.blank? %>
+                <h1>N/A</h1>
+              <% else %> 
+                <h1><%= @course.averageGrade.upcase %></h1>
+              <% end %>
+            </div>
+
+          </div> <!-- Average Grage -->
+        </div> <!-- Ratings and Average Grade Row -->
     </div>
   <% else %>
     <div id="courseDescription">
@@ -176,36 +222,6 @@
       <% end %>
     </div>
   <% end %>
-  
-  <div class="row">
-    <!-- Updates the database when needed -->
-    <% @course.update_column(:ratings, @course.average_rate) %>
-
-    <!-- Star Ratings -->
-    <div class="col-xs-8" id="starRatings">
-      <!-- Difficulty -->
-      <span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Difficulty" data-content="How hard was the class? 1 being the easiest, 5 being the hardest."><strong class="">Difficulty </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
-      <%= rating_for @course, "difficulty", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
-
-      <!-- Workload -->
-      <span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Workload" data-content="How much work did this class take? 1 being the least, 5 being the most."><strong class="">Workload </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
-      <%= rating_for @course, "workload", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
-
-      <!-- Enjoyment -->
-      <span class="pull-left"><a data-toggle="popover" data-trigger="hover" title="Enjoyment" data-content="How much did you like the class? 1 being the least, 5 being the most."><strong class="">Enjoyment </strong><span class="glyphicon glyphicon-info-sign"></span></a></span>
-      <%= rating_for @course, "enjoyment", disable_after_rate: false, imdb_avg: false, cancel_off: "blank.jpg", cancel_on: "blank.jpg" %>
-    </div> <!-- Star Ratings-->
-
-    <!-- Average Grage -->
-    <div class="col-xs-4" align="center" id="averageGrade">
-      <h4 style="display:inline">Average Grade: </h4>
-      <% if @course.averageGrade.blank? %>
-        N/A
-      <% else %> 
-        <%= @course.averageGrade %>
-      <% end %>
-    </div> <!-- Average Grage -->
-  </div> <!-- Ratings and Average Grade Row -->
 
   <!-- Reviews -->
   <div class="container-fluid" id="">
