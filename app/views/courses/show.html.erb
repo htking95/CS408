@@ -232,7 +232,7 @@
                   </h4>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                   <h4>
                     <b>Teacher's Assistants:</b>
                     <% if !review.TAs.blank? %>
@@ -243,18 +243,22 @@
                   </h4>
                 </div>
 
-                <div class="col-lg-1">
+                <div class="col-lg-2">
                   <% if (review.user_id == current_user.id) %>
                     <h4>
                       <%= link_to edit_course_review_path(:course_id => @course.id, :id => review.id) do%>
-                        <span style="color: blue">Edit <i class="icon ion-edit"></i></span>
+                        <span style="color: blue; text-align:right">Edit <i class="icon ion-edit"></i></span>
                       <% end %>
                     </h4>
                   <% else %>
                     <% if review.syllabus.to_s.eql? ""%>
                       &nbsp
                     <% else %>
-                      <%= link_to 'Syllabus', review.syllabus_url, class: "download" %>
+                      <h4 style="text-align:right">
+                        <%= link_to review.syllabus_url, class: "download" do%>
+                          <span style="color:blue"> Syllabus <i class="icon ion-android-download"></i></span>
+                        <% end %>
+                      </h4>
                     <% end %>
                   <% end %>
                 </div>
@@ -405,7 +409,7 @@
                   <% if review.syllabus.to_s.eql? ""%>
                     &nbsp
                   <% else %>
-                    <%= link_to review.syllabus_url, class: "download" do %>
+                    <%= link_to new_user_session_path do %>
                       <span style="color:blue"> Syllabus <i class="icon ion-android-download"></i></span>
                     <% end %>
                   <% end %>
