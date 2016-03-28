@@ -71,11 +71,12 @@
   }
 
   .vote {
-    color: white !important; 
+    /*color: white !important; */
   }
   .vote:hover {
-    color: white;
+    /*color: white;*/ 
     background-color: transparent;
+    text-decoration: none;
   }
 
   .answerBar {
@@ -84,14 +85,28 @@
   }
 
   .vote2 {
-    color: white !important; 
+    /*color: white !important; */
   }
   .vote2:hover {
-    color: white;
+    /*color: white;*/
+    text-decoration: none;
     background-color: transparent;
+  }
+  .glyphicon-thumbs-up {
+    font-size: 1.5em;
+  }
+  .glyphicon-thumbs-down {
+    font-size: 1.5em;
+  }
+  .glyphicon-flag{
+    font-size: 1.5em;
+  }
+  .ion-android-happy{
+    font-size: 1.5em;
   }
   </style>
 
+<head>
 <script>
     var aboutMe = "";
     $(document).ready(function(){
@@ -100,6 +115,8 @@
     });
 </script>
 
+<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
+</head>
 <div class="container" id="main">
   <!-- Course Header -->
   <div class="jumbotron">
@@ -184,114 +201,293 @@
   </div>
 
   <!-- Reviews -->
-  <div class="container-fluid" id="reviews">
+  <div class="container-fluid" id="">
     <h3>Reviews</h3>
     <% if @reviews.blank? %>
       <h3 align="center">Hmm. No one has written a review yet. You could be the first!</h3>
     <% else %>
-      <% @reviews.each do |review| %>
-        <div class="row reviewRow" style="margin-bottom: 10px; background-color: #7CA6C0">
-          <div class="col-xs-12" style="box-shadow: 0px 0px 7px black inset; padding: 10px">
-            <div class="col-xs-6" style="border-bottom: 1px solid black">
-                <b>Professor:</b>
-                <% if !review.Instructor.blank? %>
-                  <%= review.Instructor %>
-                <% else %>
-                  N/A
-                <% end %>
-            </div>
+      <% if user_signed_in? %>
+        <% @reviews.each do |review| %>
+          <div class="container-fluid" style="border: 2px solid #000000; border-radius: 7px; margin-top: 5px;">
+              <div class="row" style="border-bottom: 1px solid #000000">
+                <div class="col-lg-3">
+                  <h4><b>Professor:</b>
+                  <% if !review.Instructor.blank? %>
+                    <%= review.Instructor %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                  </h4>
+                </div>
 
-            <div class="col-xs-6" align="right" style="border-bottom: 1px solid black">
-              <% if review.syllabus.to_s.eql? ""%>
-                &nbsp
-              <% else %>
-                <%= link_to 'Download Syllabus', review.syllabus_url, class: "download" %>
-              <% end %>
-            </div>
-                
-            <div class="col-xs-12">
-              <b>Teachers Assistants:</b>
-              <% if !review.TAs.blank? %>
-                  <%= review.TAs %>
-                <% else %>
-                  N/A
-                <% end %>
-            </div>
-            
-            <div class="col-xs-12" style="border: 1px solid black">
-              <b>Review:</b><br>
-              <%= review.Comment %>
-            </div>
+                <div class="col-lg-2">
+                  <h4>
+                  <b>
+                    <% if !review.Semester.blank? %>
+                        <%= review.Semester %> <%= review.YearTaken %>
+                    <% else %>
+                        N/A
+                    <% end %>
+                  </b>
+                  </h4>
+                </div>
 
-            <div class="col-xs-6">
-                <b>Grade Recieved:</b> 
-                <% if !review.GradeReceived.blank? %>
-                  <%= review.getGrade(review.GradeReceived) %>
-                <% else %>
-                  N/A
-                <% end %>
-            </div>
+                <div class="col-lg-6">
+                  <h4>
+                    <b>Teacher's Assistants:</b>
+                    <% if !review.TAs.blank? %>
+                      <%= review.TAs %>
+                    <% else %>
+                      N/A
+                    <% end %>
+                  </h4>
+                </div>
 
-            <div class="col-xs-6" align="right">
-                <b>Hours/week:</b>
-                <% if !review.HoursAWeek.blank? %>
-                  <%= review.HoursAWeek %>
-                <% else %>
-                  N/A
-                <% end %>
-            </div>
+                <div class="col-lg-1">
+                  <% if (review.user_id == current_user.id) %>
+                    <h4>
+                      <%= link_to edit_course_review_path(:course_id => @course.id, :id => review.id) do%>
+                        <span style="color: blue">Edit <i class="icon ion-edit"></i></span>
+                      <% end %>
+                    </h4>
+                  <% else %>
+                    <% if review.syllabus.to_s.eql? ""%>
+                      &nbsp
+                    <% else %>
+                      <%= link_to 'Syllabus', review.syllabus_url, class: "download" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
 
-            <div class="col-xs-6">
-              <b>Textbook required?</b> 
-              <% if !review.TextbookRequired.blank? %>
-                  <%= review.TextbookRequired  ? 'Yes' : 'No'  %>
-              <% else %>
-                  N/A
-              <% end %>
-            </div>
+              <div class="row" style="margin-top: 5px">
+                <div class="col-lg-7" >
+                  <div class="well well-sm">
+                    <%= review.Comment %>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <b>Hours/week:</b>
+                  <% if !review.HoursAWeek.blank? %>
+                    <%= review.HoursAWeek %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                  <br>
+                  <b>Textbook required?</b> 
+                  <% if !review.TextbookRequired.blank? %>
+                      <%= review.TextbookRequired  ? 'Yes' : 'No'  %>
+                  <% else %>
+                      N/A
+                  <% end %>
+                  <br>
+                  <b>Attendance requred?</b>
+                  <% if !review.AttendanceRequired.blank? %>
+                      <%= review.AttendanceRequired  ? 'Yes' : 'No'  %>
+                  <% else %>
+                      N/A
+                  <% end %>
+                  <br>
+                  <b>Grade Recieved:</b> 
+                  <% if !review.GradeReceived.blank? %>
+                    <%= review.getGrade(review.GradeReceived) %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                </div>
+              </div>
 
-            <div class="col-xs-6" align="right">
-              <b>Attendance requred?</b>
-              <% if !review.AttendanceRequired.blank? %>
-                  <%= review.AttendanceRequired  ? 'Yes' : 'No'  %>
-              <% else %>
-                  N/A
-              <% end %>
-            </div>
-            <div class="col-xs-12">
-              <b>Taken during:</b> 
-              <% if !review.Semester.blank? %>
-                  <%= review.Semester %> <%= review.YearTaken %>
-              <% else %>
-                  N/A
-              <% end %>
-            </div>
-            <div>
-              <% if review.user_id == current_user.id %>
-                <%= link_to 'Edit', edit_course_review_path(:course_id => @course.id, :id => review.id)%>
-              <% end %>
-            </div>
-            <div class="col-xs-6">
-              <%= review.scoreReview %>
-              <%= link_to 'upvote', like_review_path(review), method: :put, class: "vote" %>
-              <%= link_to 'downvote', dislike_review_path(review), method: :put, class: "vote" %>
-            </div>
-            <div class="col-xs-6" align="right">
-              <%= link_to 'funnyvote', funny_review_path(review), method: :put, class: "vote" %>
-              <%= review.scoreFunny %>
-            </div>
-            <div class="col-xs-6">
-              <%= review.scoreFlag %> <%= link_to 'flag', flag_review_path(review), :data => {:confirm => 'Are you sure?'}, method: :put, class: "vote" %>
-            </div>
-            
-            <div class="col-xs-6" align="right">
-              Review created on: <%= review.created_at.strftime("%B %d, %Y") %>
-            </div>
+              <div class="row" style="margin-top: 0px;">
+                <div class="col-lg-4">
+                  <% if !(current_user.voted_as_when_voted_for review).nil? %> <!-- If has been voted for -->
+                    <% if current_user.voted_as_when_voted_for review %> <!-- If vote was a like -->
+                      <span style="font-size:1.35em;">(<%= review.scoreReview %>)</span>
+                      <%= link_to like_review_path(review), method: :put, class: "vote" do %>
+                        <span class="glyphicon glyphicon-thumbs-up" style="color:green"></span>
+                      <% end %>
+
+                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                      <% end %>
+                    <% else %> <!-- If vote was a dislike-->
+                      <span style="font-size:1.35em;">(<%= review.scoreReview %>)</span>
+                      <%= link_to like_review_path(review), method: :put, class: "vote" do %>
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                      <% end %>
+
+                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                        <span class="glyphicon glyphicon-thumbs-down" style="color:red"></span>
+                      <% end %>
+                    <% end %>
+                  <% else %> <!-- No vote yet -->
+                    <span style="font-size:1.35em;">(<%= review.scoreReview %>)</span>
+                      <%= link_to like_review_path(review), method: :put, class: "vote" do %>
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                      <% end %>
+
+                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                      <% end %>
+                  <% end %>
+                </div>
+                <div class="col-lg-8" style="text-align:right">
+                  <% if current_user.voted_as_when_voted_for review, :vote_scope => 'flag' %>
+                    <%= link_to flag_review_path(review), method: :put, class: "vote" do %>
+                      <span class="glyphicon glyphicon-flag" style="color:red"></span> Flag review
+                    <% end %>
+                  <% else %>
+                    <%= link_to flag_review_path(review), :data => {:confirm => 'Are you sure?'}, method: :put, class: "vote" do %>
+                      <span class="glyphicon glyphicon-flag"></span> Flag review
+                    <% end %>
+                  <% end %>
+                  (<%= review.scoreFlag %>)
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-lg-7">
+                  <% if current_user.voted_as_when_voted_for review, :vote_scope => 'funny' %>
+                    <i class="icon ion-happy" style="font-size:1.5em; color:blue;"></i>
+                  <% end %>
+
+                  <%= link_to funny_review_path(review), method: :put, class: "vote" do%>
+                  <span style="color:blue">Funny!</span>
+                  <% end %>
+                  <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>
+                  
+                </div>
+                <div class="col-lg-5">
+                  <p style="text-align:right">Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
+                </div>
+              </div>
           </div>
-        </div>
+        <% end %> <!-- End for each review -->
+      <% else %> <!-- Not logged in -->
+        <% @reviews.each do |review| %>
+          <div class="container-fluid" style="border: 2px solid #000000; border-radius: 7px; margin-top: 5px;">
+              <div class="row" style="border-bottom: 1px solid #000000">
+                <div class="col-lg-3">
+                  <h4><b>Professor:</b>
+                  <% if !review.Instructor.blank? %>
+                    <%= review.Instructor %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                  </h4>
+                </div>
+
+                <div class="col-lg-2">
+                  <h4>
+                  <b>
+                    <% if !review.Semester.blank? %>
+                        <%= review.Semester %> <%= review.YearTaken %>
+                    <% else %>
+                        N/A
+                    <% end %>
+                  </b>
+                  </h4>
+                </div>
+
+                <div class="col-lg-5">
+                  <h4>
+                    <b>Teacher's Assistants:</b>
+                    <% if !review.TAs.blank? %>
+                      <%= review.TAs %>
+                    <% else %>
+                      N/A
+                    <% end %>
+                  </h4>
+                </div>
+
+                <div class="col-lg-2">
+                  <h4 style="text-align:right">
+                  <% if review.syllabus.to_s.eql? ""%>
+                    &nbsp
+                  <% else %>
+                    <%= link_to review.syllabus_url, class: "download" do %>
+                      <span style="color:blue"> Syllabus <i class="icon ion-android-download"></i></span>
+                    <% end %>
+                  <% end %>
+                  </h4>
+                </div>
+
+              </div>
+
+              <div class="row" style="margin-top: 5px">
+                <div class="col-lg-7" >
+                  <div class="well well-sm">
+                    <%= review.Comment %>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <b>Hours/week:</b>
+                  <% if !review.HoursAWeek.blank? %>
+                    <%= review.HoursAWeek %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                  <br>
+                  <b>Textbook required?</b> 
+                  <% if !review.TextbookRequired.blank? %>
+                      <%= review.TextbookRequired  ? 'Yes' : 'No'  %>
+                  <% else %>
+                      N/A
+                  <% end %>
+                  <br>
+                  <b>Attendance requred?</b>
+                  <% if !review.AttendanceRequired.blank? %>
+                      <%= review.AttendanceRequired  ? 'Yes' : 'No'  %>
+                  <% else %>
+                      N/A
+                  <% end %>
+                  <br>
+                  <b>Grade Recieved:</b> 
+                  <% if !review.GradeReceived.blank? %>
+                    <%= review.getGrade(review.GradeReceived) %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 0px;">
+                <div class="col-lg-4">
+                  <span style="font-size:1.35em;">(<%= review.scoreReview %>)</span>
+                  <%= link_to like_review_path(review), method: :put, class: "vote" do %>
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                  <% end %>
+
+                  <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                    <span class="glyphicon glyphicon-thumbs-down"></span>
+                  <% end %>
+                </div>
+                <div class="col-lg-8" style="text-align:right">
+                  <%= link_to flag_review_path(review), method: :put, class: "vote" do %>
+                      <span class="glyphicon glyphicon-flag"></span> Flag review
+                    <% end %>
+                  (<%= review.scoreFlag %>)
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-lg-7">
+                  <%= link_to funny_review_path(review), method: :put, class: "vote" do%>
+                  <span style="color:blue">Funny!</span>
+                  <% end %>
+                  <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>
+                  
+                </div>
+                <div class="col-lg-5">
+                  <p style="text-align:right">Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>
+                </div>
+              </div>
+          </div>
+        <% end %> <!-- End for each review -->
       <% end %>
-    <% end %>
-  </div> <!-- Reviews -->
+    <% end %> <!-- End if reviews blank -->
+  </div> <!-- End Reviews -->
 
   <!-- Questions -->
   <div id="questions">
