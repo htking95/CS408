@@ -23,7 +23,33 @@ class Course < ActiveRecord::Base
 	    total = 0
 	    count = 0
 	    ratings.each do |rate|
-	      total = total + rate.stars
+	    	if (rate.dimension.eql? "difficulty") || (rate.dimension.eql? "workload")	then
+	    		rating = rate.stars;
+	    		case rating
+	    			when 1
+	    				total = total + 5;
+	    				count = count + 1;
+	    				next;
+	    			when 2
+	    				total = total + 4;
+	    				count = count + 1;
+	    				next;
+	    			when 3
+	    				total = total + 3;
+	    				count = count + 1;
+	    				next;
+	    			when 4
+	    				total = total + 2;
+	    				count = count + 1;
+	    				next;
+	    			when 5
+	    				total = total + 1;
+	    		      	count = count + 1;
+	    				next;
+	    		end
+	    	else
+	      		total = total + rate.stars
+	    	end
 	      count = count + 1
 	    end
 
