@@ -28,7 +28,7 @@ module CS408
     config.action_mailer.smtp_settings = {
          address:              'smtp.gmail.com',
          port:                 587,
-         domain:               'apptitutordevs@gmail.com',
+         domain:               'ratemyclasses.herokuapp.com',
          user_name:            'apptitutordevs',
          password:             'boring123',
          authentication:       'plain',
