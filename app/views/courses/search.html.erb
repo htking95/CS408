@@ -41,7 +41,7 @@
 	}
 
 	.courseLink {
-		color: black;
+		color: black !important;
 	}
 
 	.courseLink:hover {
@@ -103,7 +103,7 @@
 				    			<% if course.lastEdited.blank? %>
 				    				Last edited: n/a
 				    			<% else %>
-				    				Last edited: <%= course.updated_at %>
+				    				Last edited: <%= course.lastEdited.strftime("%B %e, %Y") %>
 				    			<% end %>
 				    		</div>
 				    	</div>
