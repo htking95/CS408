@@ -34,7 +34,7 @@
 							<%= button_tag(type: "submit", class: "btn", id: "search_button") do %>
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							<% end %>
-							<%= text_field_tag :search, params[:search], class:"form-control", :id =>"search_box", placeholder:"Search for a course at Purdue", style:"width: 85%" %>
+							<%= text_field_tag :search, params[:search], class:"form-control", :id =>"search_box", placeholder:"Search for a class at Purdue", style:"width: 85%" %>
 						</p>
 					<% end %>
 				</div>
@@ -45,22 +45,22 @@
 					<% if user_signed_in? %>
 						<ul align="right" style="color:#b1810B">
 							<li class="dropdown" align="left">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-													<span class="glyphicon glyphicon-user"></span>
-													<%= current_user.email%>
-													<span class="caret"></span>
-												</a>
-											<ul class="dropdown-menu">
-												<li><a href="/users/edit" data-no-turbolink="true">Edit Profile <span class="glyphicon pull-right glyphicon-pencil"></span></a></li>
-													<li role="separator" class="divider"></li>
-													<% if current_user.admin? %>
-														<li><a href="/pages/admin">Admin<span class="glyphicon pull-right glyphicon-king"></span></a></li>
-													<% end %>
-													<li><a href="/ContactUs">Contact Us <span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
-												<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-											</ul>
-										</li>
-									</ul>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<span class="glyphicon glyphicon-user"></span>
+									<%= current_user.email%>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="/users/edit" data-no-turbolink="true">Edit Profile <span class="glyphicon pull-right glyphicon-pencil"></span></a></li>
+										<li role="separator" class="divider"></li>
+										<% if current_user.admin? %>
+											<li><a href="/pages/admin">Admin<span class="glyphicon pull-right glyphicon-king"></span></a></li>
+										<% end %>
+										<li><a href="/ContactUs">Contact Us <span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
+									<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+								</ul>
+							</li>
+						</ul>
 					<% else %>
 						<div align="right" style="color: #B1810B">
 							<a class="sign" href="/users/sign_up">Sign Up</a> <a class="sign" href="/users/sign_in">Log In</a>
