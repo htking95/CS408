@@ -8,7 +8,7 @@
 
 	<!-- Bootstrap partial -->
  	<%= render 'layouts/bootstrapstuff' %>
- 	
+
  	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
 </head>
@@ -26,17 +26,17 @@
 
 	<!-- Render the body and navbar if not on home page -->
 	<% if current_page?('/pages/home') || current_page?('/') %>
-	    <div style="margin: 0px 0px 40px 0px; background-image: url('/gray2.gif');">
+	    <div style="margin: 0px 0px 0px 0px;">
 			<%= yield %>
 		</div>
 	<% else %>
 	    <%= render 'layouts/header'%>
-	    <div style="margin: 7px 0px 5px 0px; background-image: url('/gray2.gif');">
+	    <div style="margin: 7px 0px 0px 0px;">
 			<%= yield %>
 		</div>
 	<% end %>
 
 	<!-- Footer -->
-	<%= render 'layouts/footer' %>
+	<%#= render 'layouts/footer' %>
 </body>
 </html>
