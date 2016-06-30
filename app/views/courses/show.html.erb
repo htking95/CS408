@@ -309,7 +309,7 @@
     <% else %> <!-- Not logged in -->
       <% @reviews.each do |review| %>
         <% if review.scoreFlag < 3  then %>
-          <div class="container-fluid" style="border: 2px solid #000000; border-radius: 7px; margin-top: 5px;">
+          <div class="container-fluid" style="background: url('/assets/stripes-tile.png'); margin-top: 5px; color: #B1810B; margin-top:15px; box-shadow: 2px 2px 10px rgba(0,0,0,.6);">
               <div class="row" style="border-bottom: 1px solid #000000">
                 <div class="col-lg-3">
                   <h4><b>Professor:</b>
@@ -418,7 +418,7 @@
               <div class="row">
                 <div class="col-lg-7">
                   <%= link_to funny_review_path(review), method: :put, class: "vote" do%>
-                  <span style="color:blue">Funny!</span>
+                  <span style="color:white">Funny!</span>
                   <% end %>
                   <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>
 
