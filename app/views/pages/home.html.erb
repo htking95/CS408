@@ -1,294 +1,201 @@
-<style>
-	.adbox {
-		height: 175px;
-	}
+<%= stylesheet_link_tag '/css/home.css', :media => 'all' %>
+<link href='https://fonts.googleapis.com/css?family=Archivo+Narrow' rel='stylesheet' type='text/css'>
 
-	.adcontent {
-		padding: 10px;
-		height: 100%;
-		font-size: 120%;
-		text-align: center;
-	}
-
-	input::-webkit-input-placeholder {
-		color: gray !important;
-	}
-
-	 
-	input:-moz-placeholder { /* Firefox 18- */
-		color: gray !important;  
-	}
-
-	 
-	input::-moz-placeholder {  /* Firefox 19+ */
-		color: gray !important;  
-	}
-
-	 
-	input:-ms-input-placeholder {  
-		color: gray !important;  
-	}
-
-	a:hover {
-		background-color: transparent;
-		text-decoration: none;
-	}
-
-	#topCourseEntry{
-		background-color: #B1810B;
-		color: black !important;
-	}
-
-	.result {
-		background-color: #B1810B;
-		box-shadow: 2px 2px 20px black;
-		border-radius: 5px;
-		color: black;
-	}
-
-	.result:hover{
-		box-shadow: 6px 6px 15px black;
-		color: #555;
-	}
-
-	.resultRow {
-		margin: 5px 0px 5px 0px;
-	}
-
-	.description {
-		border: 1px solid black;
-		min-height: 100px;
-		max-height: 200px;
-		overflow: auto;
-		margin: 5px 5px 0px 5px;
-		padding: 5px;
-		background-color: #B1810B;
-	}
-
-	.descriptionBox {
-		border: 1px solid black;
-		margin-bottom: 10px;
-		background-color: white;
-	}
-
-	#pageContainer {
-		background-color: black;
-	}
-
-	.lastEdited {
-		padding-right: 10px;
-		display: inline;
-	}
-
-	.courseLink {
-		color: black !important;
-	}
-
-	.courseLink:hover {
-		color: black !important;
-	}
-
-	.courseLink:visited{
-		color:black !important;
-	}
-
-	#myHeader {
-        background-image: url('/gray3.jpg');
-        background-size: 50%;
-        margin: 0px 0px 10px 0px;
-        box-shadow: 3px 3px 10px black;
-        padding: 10px;
-        color: #B1810B;
-    }
-
-    #body {
-    	background-image: url('/gray2.gif');
-    }
-
-    .headerText {
-    	text-shadow: 3px 3px black;
-    }
-
-    #main {
-    	box-shadow: 3px 3px 10px black;
-    }
-
-    .dropdown-toggle  {
-    	color: white !important;
-    	text-decoration: none !important;
-    }
-
-    .dropdown-toggle:hover  {
-    	color: white !important;
-    	text-decoration: none !important;
-    }
-
-    .sign {
-    	color: white !important;
-    	margin-right: 8px;
-    }
-    .sign:hover {
-    	color: white !important;
-    	background-color: transparent;
-    	margin-right: 8px;
-    }
-    .vcenter {
-	    display: inline-block;
-	    vertical-align: middle;
-	    float: none;
-  	}
-</style>
-
-<div class="container" id="body">
-	<!-- Header -->
-	<div class="jumbotron" id="myHeader">
-	        <div style="height: 30px">&nbsp</div>
-	        <h1 class="headerText" style="color:white;"><b>Rate My Classes</b></h1>
-	        <h4 class="headerText">For use of students at Purdue University</h4>
+<div id="gold_nav" class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+			<ul class="nav navbar-nav right" id="apptitutor">
+				<li>
+					Looking for a tutor? Find one that fits your needs at <a href="http://apptitutor.herokuapp.com" id="apptitutor_link">Apptitutor.com!</a>
+				</li>
+			</ul>
 	</div>
+</div>
 
-	<!-- Main -->
-	<div id="main">
-		<!-- Searchbar -->
-		<div style="background-color: #B1810B; border-bottom: 1px solid black; ;">
-			<div class="container-fluid" style="">
-				<div class="row" style="">
-					<div class="col-xs-0 col-sm-1 col-md-3">
+<div id="top">
+	<div class="container">
+		<div class="row">
+			<h1 style="margin-bottom:0px"><div id="title_block">Rate My Classes</div></h1>
+			<div style="color: #B1810B; padding-left: 2px;">
+				For use by students at Purdue University
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="black_nav" class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 vcenter" id="left_blank">&nbsp</div>
+			<div class="col-xs-6 vcetner">
+				<div class="vcenter" style="height:50px">&nbsp</div>
+				<div class="vcenter" style="width: 90%">
+					<%= form_tag search_courses_path, method: :get, class: "input-group vcenter", style:"width: 98%; vertical-align:middle" do %>
+						<p>
+							<%= button_tag(type: "submit", class: "btn", id: "search_button") do %>
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							<% end %>
+							<%= text_field_tag :search, params[:search], class:"form-control", :id =>"search_box", placeholder:"Search for a class at Purdue", style:"width: 85%" %>
+						</p>
+					<% end %>
+				</div>
+			</div>
+			<div class="col-xs-3 vcenter">
+				<div class="vcenter" style="height:50px">&nbsp</div>
+				<div class="vcenter" style="width: 90%">
+					<% if user_signed_in? %>
+						<ul align="right" style="color:#b1810B">
+							<li class="dropdown" align="left">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<span class="glyphicon glyphicon-user"></span>
+									<%= current_user.email%>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="/users/edit" data-no-turbolink="true">Edit Profile <span class="glyphicon pull-right glyphicon-pencil"></span></a></li>
+										<li role="separator" class="divider"></li>
+										<% if current_user.admin? %>
+											<li><a href="/pages/admin">Admin<span class="glyphicon pull-right glyphicon-king"></span></a></li>
+										<% end %>
+										<li><a href="/ContactUs">Contact Us <span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
+									<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+								</ul>
+							</li>
+						</ul>
+					<% else %>
+						<div align="right" style="color: #B1810B">
+							<a class="sign" href="/users/sign_up">Sign Up</a> <a class="sign" href="/users/sign_in">Log In</a>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="background-image"></div>
+<div id="content">
+	<div class="container" id="content_container">
+		<div class="row" style="margin-top: 8px; margin-bottom:8px">
+			<div class="col-xs-0 col-md-2">
+				&nbsp
+			</div>
+			<div class="col-xs-12 col-md-8" align="center">
+				<div class="my_ad_box" align="left">
+					<div style="width: 150px; height: 10px; background-color: rgb(70,150,230); margin-left: 30px; margin-bottom: 10px">
 						&nbsp
 					</div>
-					<div class="col-xs-12 col-sm-7 col-md-6">
-				      	<%= form_tag search_courses_path, method: :get, class: "input-group", style:"width: 100%" do %>
-				      		<p>
-				      			<%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search for a course at Purdue", style:"border-radius: 20px; height: 40px; width: 85%; margin-top: 8px; border: 5px solid gray; background-color: white; color: black;" %>
-				      			<%= button_tag(type: "submit", class: "btn", style:"background-color:white; border-radius:20px; margin-top: 8px; border: 5px solid gray; height: 40px;") do %>
-				      				<span class="glyphicon glyphicon-search" aria-hidden="true" style="padding-top: -5px"></span>
-				      			<% end %>
-				      		</p>
-				      	<% end %>
-				    </div>
-				    <div class="col-xs-12 col-sm-4 col-md-3">
-						<div style="margin-top: 15px">
-						<% if user_signed_in? %>
-							<ul align="right" style="color:white">
-								<li class="dropdown" align="left">
-				              		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-				                		<span class="glyphicon glyphicon-user"></span>
-				                		<%= current_user.email%>
-					                	<span class="caret"></span>
-					              	</a>
-					            	<ul class="dropdown-menu">
-						            	<li><a href="/users/edit" data-no-turbolink="true">Edit Profile <span class="glyphicon pull-right glyphicon-pencil"></span></a></li>
-						                <li role="separator" class="divider"></li>
-
-						                <li><a href="/ContactUs">Contact Us <span class="glyphicon pull-right glyphicon-question-sign"></span></a></li>
-						            	<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-					            	</ul>
-				            	</li>
-			            	</ul>
-						<% else %>
-							<div align="right">
-								<a class="sign" href="/users/sign_up">Sign Up</a> <a class="sign" href="/users/sign_in">Log In</a>
-							</div>
-						<% end %>
-						</div>
-					</div>
-			    </div>
-			</div>
-		</div> <!-- End Searchbar -->
-
-		<!-- Ad boxes -->
-		<div style="background-image: url('/rocks1.jpg'); background-size: 30%">
-			<div class="container" style="height: 200px;">
-				<div class="row" style="margin: 10px;">
-					<div class="col-xs-4 adbox">
-						<div class="adcontent"><img src="/boximg_2.jpg" height="100%" style="max-width:100%" alt="boximage1"></div>
-					</div>
-					<div class="col-xs-4 adbox">
-						<div class="adcontent"><img src="/boximg_1.jpg" height="100%" style="max-width:100%" alt="boximage2"></div>
-					</div>
-					<div class="col-xs-4 adbox">
-						<div class="adcontent"><img src="/boximg_3.jpg" height="100%" style="max-width:100%" alt="boximage3"></div>
-					</div>
+					<h3>See What Others Are Saying About the Classes You Want to Take!</h3>
 				</div>
 			</div>
-		</div> <!-- end Ad boxes -->
-
-		<!-- Top rated Courses -->
-		<div class="container-fluid" style="background-color: white; min-height: 500px; padding: 0px 50px 0px 50px">
-			<div class="row">
-				<div class="col-xs-1">&nbsp</div>
-				<div class="col-xs-10" align="center" style="color: #B1810B">
-					<h3 class=""><b>#Top Rated Courses</b></h3>
-				</div>
-				<div class="col-xs-1">&nbsp</div>
+			<div class="col-xs-0 col-md-2">
+				&nbsp
 			</div>
-			<div class="row" align="center" style="background-color: white; color: white">
-				<div class="col-xs-1">
-					&nbsp
+		</div>
+		<div class="row" style="margin-bottom:8px">
+			<div class="col-xs-12 col-md-5" align="center">
+				<div class="my_ad_box">
+					<div style="width: 150px; height: 10px; background-color: rgb(10,130,10); margin-left: 30px; margin-bottom: 10px">
+						&nbsp
+					</div>
+					<h3>Share Your experience! Good or Bad!</h3>
 				</div>
-
-				<div class="col-xs-10">
-					<div class="container-fluid">
-
-						<%= @i = 1 %>
-						<% # @courses.sort_by{|x| x[:ratings] }.reverse.first(10).each do |course| %>
-						<% @courses.sort_by{|x| x[:ratings] }.reverse.first(5).reverse.each do |course| %>
-							<div class="row resultRow">
-								<a href="" class="courseLink">
-								<div class="col-xs-12 result">
-									<div align="left" style="font-size:normal"><b>#<%= @i %></b></div>
-								    <div><h3 style="margin-top: 5px"><b><%= course.fullName %> : <%= course.name %></b></h3></div>
-								    <div><h5><b><%= course.departmentFull %> Department (<%= course.department %>)</b></h5></div>
-								    <hr style="margin:0px; border: 1px solid white">
-								    <div class="" style="padding-top: 4px">
-								    	Course Description:
-								    	<div class="descriptionBox">
-								    		<div class="description">
-								    			<% if course.description.blank? %>
-								    				There is no description for this course yet. If you are familiar with this course, please write a review for this course and add to the description yourself!
-								    			<% else %>
-								    				<%= course.description %>
-								    			<% end %>
-								    		</div>
-
-								    	  <% if course.ratings? %>
-							                <% if course.ratings.to_f >= 4.5 %>
-							                  <div class="col-xs-9 vcenter"><b>Average Ratings:</b><img src="/assets/5stars.png" style="height:30px; width:120px; "></div>
-							                <% elsif course.ratings.to_f >= 3.5 %>
-							                  <div class="col-xs-9 vcenter"><b>Average Ratings:</b><img src="/assets/4stars.png" style="height:30px; width:120px; "></div>
-							                <% elsif course.ratings.to_f >= 2.5 %>
-							                  <div class="col-xs-9 vcenter"><b>Average Ratings:</b><img src="/assets/3stars.png" style="height:30px; width:120px; "></div>
-							                <% elsif course.ratings.to_f >= 1.5 %>
-							                  <div class="col-xs-9 vcenter"><b>Average Ratings:</b><img src="/assets/2stars.png" style="height:30px; width:120px; "></div>
-							                <% elsif course.ratings.to_f > 0 %>
-							                  <div class="col-xs-9 vcenter"><b>Average Ratings:</b><img src="/assets/1star.png" style="height:30px; width:120px; "></div>
-							                <% end %>
-							              <%else%>
-							                <div class="col-xs-9 vcenter"><b>Average Ratings:</b> No rating available</div>
-							              <% end %>
-
-
-								    		<div align="right" class="lastEdited">
-								    			<% if course.lastEdited.blank? %>
-								    				Last edited: N/A
-								    			<% else %>
-								    				Last edited: <%= course.lastEdited.strftime("%B %e, %Y") %>
-								    			<% end %>
-								    		</div>
-								    	</div>
-								    </div>
+			</div>
+			<div class="col-xs-0 col-md-2">
+				&nbsp
+			</div>
+			<div class="col-xs-12 col-md-5" align="center">
+				<div class="my_ad_box">
+					<div style="width: 150px; height: 10px; background-color: rgb(160,30,10); margin-left: 30px; margin-bottom: 10px">
+						&nbsp
+					</div>
+					<h3>Ask Questions and Get Real Answers!</h3>
+				</div>
+			</div>
+		</div>
+		<div align="center">
+			<div style="width: 300px; background-color: white; color: #B1810B; padding: 10px 20px; box-shadow: 2px 2px 10px rgba(0,0,0,.6);">
+				<h3>Top Rated Classes</h3>
+			</div>
+		</div>
+		<!-- Top rated classes -->
+			<% @i = 1 %>
+			<% @courses.sort_by{|x| x[:ratings] }.reverse.first(10).each do |course| %>
+				<% if @i % 2 != 0 %>
+				<div class="row resultRow">
+				<% end %>
+					<a href="/courses/<%=course.id%>" class="courseLink">
+						<div class="col-sm-12 col-md-6">
+							<div class="result">
+								<!-- Department and Rank -->
+								<div class="row">
+										<div class="col-xs-10">
+											<%= course.departmentFull %> Department (<%= course.department %>)
+										</div>
+										<div class="col-xs-2" align="right" style="color: #B1810B"><b>No. <%= @i %></b></div>
 								</div>
-								</a>
+								<!-- Course Number and Name -->
+								<h3 style="margin-top: 5px" align="center"><b><%= course.fullName %> <span style="color: #B1810B">|</span> <%= course.name %></b></h3>
+
+								<!-- Rating -->
+								<div class="row">
+									<% if course.ratings? %>
+										<% if course.ratings.to_f >= 4.5 %>
+											<div class="col-xs-12 " align="center"><b></b><img src="/assets/5stars.png" style="height:30px; width:120px; "></div>
+										<% elsif course.ratings.to_f >= 3.5 %>
+											<div class="col-xs-12 " align="center"><b></b><img src="/assets/4stars.png" style="height:30px; width:120px; "></div>
+										<% elsif course.ratings.to_f >= 2.5 %>
+											<div class="col-xs-12 " align="center"><b></b><img src="/assets/3stars.png" style="height:30px; width:120px; "></div>
+										<% elsif course.ratings.to_f >= 1.5 %>
+											<div class="col-xs-12 " align="center"><b></b><img src="/assets/2stars.png" style="height:30px; width:120px; "></div>
+										<% elsif course.ratings.to_f > 0 %>
+											<div class="col-xs-12 " align="center"><b></b><img src="/assets/1star.png" style="height:30px; width:120px; "></div>
+										<% end %>
+									<%else%>
+										<div class="col-xs-12" align="center"><b></b> No rating available</div>
+									<% end %>
+								</div>
+
+								<!-- Description -->
+								<div class="description_box">
+									<% if course.description.blank? %>
+										There is no description for this course yet. If you are familiar with this course, please write a review for this course and add to the description yourself!
+									<% else %>
+										<%= course.description %>
+									<% end %>
+								</div>
+
+								<!-- Last Reviewed -->
+								<div align="right">
+									<% if course.lastEdited.blank? %>
+										Last Reviewed: N/A
+									<% else %>
+										Last Reviewed: <%= course.lastEdited.strftime("%B %e, %Y") %>
+									<% end %>
+								</div>
 							</div>
-							<%= @i+=1 %>
-							<br>
-						<% end %>
+						</div>
+					</a>
+					<% if @i % 2 == 0 %>
 					</div>
-				</div>
-				<div class="col-xs-1">
-					&nbsp
-				</div>
-			</div>
-		</div><!-- End Top Rated Courses -->
-	</div><!-- End of Main -->
+					<% end %>
+
+				<% @i+=1 %>
+			<% end %>
+		 <!-- End Top rated classes -->
+	</div>
+</div>
+
+<div id="bottom">
+	<div class="container">
+		<div align="center">
+			<a href="/pages/about" class="link" style="color: #B1810B;">About</a> | <a href="/ContactUs" class="link" style="color: #B1810B;">Contact Us</a> |
+			<a href="/pages/privacypolicy" class="link" style="color: #B1810B;">Privacy Policy</a>
+		</div>
+		<div align="center">
+			Designed and Maintained by DevTeam3
+		</div>
+		<div align="center">
+			Trouble with this page? Please contact us at admin@ratemyclasses.com
+		</div>
+	</div>
 </div>
