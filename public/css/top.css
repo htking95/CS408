@@ -104,3 +104,6 @@ input:-ms-input-placeholder {
   background-color: transparent;
   margin-right: 8px;
 }
+.dropdown-menu a {
+  color: #B1810B !important;
+}

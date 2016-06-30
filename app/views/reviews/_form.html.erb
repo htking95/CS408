@@ -11,8 +11,8 @@
     </div>
   <% end %>
 
-  <div style="background-color:#BAA892; margin-bottom: 10px; margin-top: 10px; border: 0px solid black;">
-    <div class="row">            
+  <div style="background: url('/assets/stripes-tile.png'); margin-bottom: 0px; margin-top: ; color: #B1810B">
+    <div class="row">
       <div class="col-md-12">
         <h4 style="padding-left:20px; padding-right:20px;">
           <%= f.hidden_field :userID, "value" => current_user.id %>
@@ -61,7 +61,7 @@
       </h4>
     </div>
   </div>
-  <div style="background-color: #B1810B; padding: 10px; margin-bottom: 10px; text-shadow: 1px 1px black">
+  <div style="background-color: #B1810B; padding: 10px; margin-bottom: 10px;">
     <%= link_to 'Back', course_path(@cid), style: "color: white", class: "backLink" %>
   </div>
 </div>
