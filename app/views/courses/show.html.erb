@@ -29,7 +29,7 @@
 <% if user_signed_in? %> <!-- Description -->
   <div  class="" id="courseDescription">
     <h4 style="margin-bottom: 7px; color:white; text-shadow: 1px 1px black"><b> Course Description:</b></h4>
-    <div style="padding: 10px; margin-left: 10px; margin-right: 10px; font-size: 1.2em; border: 1px solid; border-radius: 5px;">
+    <div style="padding: 10px; margin-left: 10px; margin-right: 10px; font-size: 1.2em; border: 1px solid; border-radius: 5px; max-height: 200px; overflow-y: auto;">
       <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea,:ok_button => 'Submit',:confirm=>true, :ok_button_class => 'desc_ok_but btn btn-default', :class => "descSpan"%>
     </div>
     <div class="test"></div>
