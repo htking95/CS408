@@ -46,6 +46,8 @@ GEM
       railties (>= 3.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
     builder (3.2.2)
     byebug (8.2.2)
     carrierwave (0.10.0)
@@ -334,6 +336,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_votable
   best_in_place (~> 3.0.1)
+  bootstrap-sass (~> 3.2.0.2)
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
@@ -362,5 +365,8 @@ DEPENDENCIES
   will_paginate (~> 3.0.6)
   will_paginate-bootstrap
 
+RUBY VERSION
+   ruby 2.2.2p95
+
 BUNDLED WITH
-   1.10.6
+   1.12.5
