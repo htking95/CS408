@@ -75,7 +75,7 @@
                       N/A
                     <% end %>
                     <br>
-                    <b>Textbook required?</b> 
+                    <b>Textbook required?</b>
                     <% if !review.TextbookRequired.blank? %>
                         <%= review.TextbookRequired  ? 'Yes' : 'No'  %>
                     <% else %>
@@ -89,7 +89,7 @@
                         N/A
                     <% end %>
                     <br>
-                    <b>Grade Recieved:</b> 
+                    <b>Grade Recieved:</b>
                     <% if !review.GradeReceived.blank? %>
                       <%= review.getGrade(review.GradeReceived) %>
                     <% else %>
@@ -107,7 +107,7 @@
                           <span class="glyphicon glyphicon-thumbs-up" style="color:green"></span>
                         <% end %>
 
-                        <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                        <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                           <span class="glyphicon glyphicon-thumbs-down"></span>
                         <% end %>
                       <% else %> <!-- If vote was a dislike-->
@@ -116,7 +116,7 @@
                           <span class="glyphicon glyphicon-thumbs-up"></span>
                         <% end %>
 
-                        <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                        <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                           <span class="glyphicon glyphicon-thumbs-down" style="color:red"></span>
                         <% end %>
                       <% end %>
@@ -126,7 +126,7 @@
                           <span class="glyphicon glyphicon-thumbs-up"></span>
                         <% end %>
 
-                        <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                        <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                           <span class="glyphicon glyphicon-thumbs-down"></span>
                         <% end %>
                     <% end %>
@@ -152,11 +152,11 @@
                       <i class="icon ion-happy" style="font-size:1.5em; color:blue;"></i>
                     <% end %>
 
-                    <%= link_to funny_review_path(review), method: :put, class: "vote" do%>
+                    <%= link_to funny_review_path(review), method: :put, class: "vote" do %>
                     <span style="color:blue">Funny!</span>
                     <% end %>
                     <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>
-                    
+
                   </div>
                   <div class="col-lg-5 col-xs-7">
                     <p style="text-align:right;">Review created on: <%= review.created_at.strftime("%B %d, %Y") %></p>

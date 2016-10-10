@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag '/css/course_show.css', :media => 'all' %>
 <head>
   <script>
       var aboutMe = "";
@@ -10,7 +9,6 @@
           });
       });
   </script>
-
   <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
 </head>
 
@@ -27,8 +25,8 @@
 
 <% if user_signed_in? %> <!-- Description -->
   <div  class="" id="courseDescription">
-    <h4 style="margin-bottom: 7px; color:white; text-shadow: 1px 1px black"><b> Course Description:</b></h4>
-    <div style="padding: 10px; margin-left: 10px; margin-right: 10px; font-size: 1.2em; border: 1px solid; border-radius: 5px;">
+    <h4 style=""><b> Course Description:</b></h4>
+    <div id="description_container" style="">
       <%= best_in_place @course, :description , :place_holder => "No description of this class has been written yet. Click me to write one!", :as => :textarea,:ok_button => 'Submit',:confirm=>true, :ok_button_class => 'desc_ok_but btn btn-default', :class => "descSpan"%>
     </div>
     <div class="test"></div>
@@ -183,7 +181,7 @@
                 <div class="col-lg-2 col-xs-6">
                   <% if (review.user_id == current_user.id) %>
                     <h4>
-                      <%= link_to edit_course_review_path(:course_id => @course.id, :id => review.id) do%>
+                      <%= link_to edit_course_review_path(:course_id => @course.id, :id => review.id) do %>
                         <span style="color: white; text-align:right">Edit <i class="icon ion-edit"></i></span>
                       <% end %>
                     </h4>
@@ -192,7 +190,7 @@
                       &nbsp
                     <% else %>
                       <h4 style="text-align:right">
-                        <%= link_to review.syllabus_url, class: "download" do%>
+                        <%= link_to review.syllabus_url, class: "download" do %>
                           <span style="color:blue"> Syllabus <i class="icon ion-android-download"></i></span>
                         <% end %>
                       </h4>
@@ -203,7 +201,7 @@
 
               <div class="row" style="margin-top: 5px">
                 <div class="col-lg-7 col-xs-12" >
-                  <div class="well well-sm">
+                  <div class="well well-sm" style="max-height: 300px; overflow-y: auto">
                     <%= review.Comment %>
                   </div>
                 </div>
@@ -247,7 +245,7 @@
                         <span class="glyphicon glyphicon-thumbs-up" style="color:green"></span>
                       <% end %>
 
-                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                         <span class="glyphicon glyphicon-thumbs-down"></span>
                       <% end %>
                     <% else %> <!-- If vote was a dislike-->
@@ -256,7 +254,7 @@
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                       <% end %>
 
-                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                         <span class="glyphicon glyphicon-thumbs-down" style="color:red"></span>
                       <% end %>
                     <% end %>
@@ -266,7 +264,7 @@
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                       <% end %>
 
-                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                      <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                         <span class="glyphicon glyphicon-thumbs-down"></span>
                       <% end %>
                   <% end %>
@@ -292,7 +290,7 @@
                     <i class="icon ion-happy" style="font-size:1.5em; color:blue;"></i>
                   <% end %>
 
-                  <%= link_to funny_review_path(review), method: :put, class: "vote" do%>
+                  <%= link_to funny_review_path(review), method: :put, class: "vote" do %>
                   <span style="color:white">Funny!</span>
                   <% end %>
                   <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>
@@ -401,7 +399,7 @@
                     <span class="glyphicon glyphicon-thumbs-up"></span>
                   <% end %>
 
-                  <%= link_to dislike_review_path(review), method: :put, class: "vote" do%>
+                  <%= link_to dislike_review_path(review), method: :put, class: "vote" do %>
                     <span class="glyphicon glyphicon-thumbs-down"></span>
                   <% end %>
                 </div>
@@ -416,7 +414,7 @@
 
               <div class="row">
                 <div class="col-lg-7">
-                  <%= link_to funny_review_path(review), method: :put, class: "vote" do%>
+                  <%= link_to funny_review_path(review), method: :put, class: "vote" do %>
                   <span style="color:white">Funny!</span>
                   <% end %>
                   <span style="font-size: .8em;"><%= review.scoreFunny %> people found this review funny</span>

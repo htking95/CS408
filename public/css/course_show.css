@@ -235,6 +235,8 @@ a:hover {
 .descSpan{
   width: 100%;
   display: block;
+  max-height: 200px;
+  overflow-y: auto;
 }
 .desc_ok_but{
   display: block;

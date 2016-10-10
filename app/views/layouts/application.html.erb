@@ -2,17 +2,19 @@
 <html>
 <head>
 	<title>RateMyClasses</title>
+
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
 
 	<!-- Bootstrap partial -->
- 	<%= render 'layouts/bootstrapstuff' %>
+ 	<%#= render 'layouts/bootstrapstuff' %>
 
 	<!-- Custom Stylesheets -->
-	<%= stylesheet_link_tag '/css/top.css', :media => 'all' %>
-	<%= stylesheet_link_tag '/css/bottom.css', :media => 'all' %>
-	<%= stylesheet_link_tag '/css/about.css', :media => 'all' %>
+	<!-- these should be taken care of by the scss files in assets -->
+	<%#= stylesheet_link_tag '/css/top.css', :media => 'all' %>
+	<%#= stylesheet_link_tag '/css/bottom.css', :media => 'all' %>
+	<%#= stylesheet_link_tag '/css/about.css', :media => 'all' %>
 	<link href='https://fonts.googleapis.com/css?family=Archivo+Narrow' rel='stylesheet' type='text/css'>
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" rel="stylesheet" />
@@ -20,8 +22,6 @@
 </head>
 
 <body>
-
-
 	<!-- Render the body and navbar if not on home page -->
 	<% if current_page?('/pages/home') || current_page?('/') %>
 	    <div style="margin: 0px 0px 0px 0px;">
